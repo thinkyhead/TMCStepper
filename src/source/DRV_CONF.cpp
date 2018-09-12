@@ -5,19 +5,31 @@
 #define GET_REG(SETTING) return DRV_CONF_register.SETTING;
 
 // W: DRV_CONF
-uint32_t TMC5160Stepper::DRV_CONF() { return DRV_CONF_register.sr; }
-void TMC5160Stepper::DRV_CONF(uint32_t input) {
+template<typename T>
+uint32_t TMC5160StepperBase<T>::DRV_CONF() { return DRV_CONF_register.sr; }
+template<typename T>
+void TMC5160StepperBase<T>::DRV_CONF(uint32_t input) {
 	DRV_CONF_register.sr = input;
 	WRITE_REG(DRV_CONF);
 }
 
-void TMC5160Stepper::bbmtime(uint8_t B)		{ SET_REG(bbmtime); 	}
-void TMC5160Stepper::bbmclks(uint8_t B)		{ SET_REG(bbmclks); 	}
-void TMC5160Stepper::otselect(uint8_t B)	{ SET_REG(otselect); 	}
-void TMC5160Stepper::drvstrength(uint8_t B)	{ SET_REG(drvstrength); }
-void TMC5160Stepper::filt_isense(uint8_t B)	{ SET_REG(filt_isense); }
-uint8_t TMC5160Stepper::bbmtime()			{ GET_REG(bbmtime);		}
-uint8_t TMC5160Stepper::bbmclks()			{ GET_REG(bbmclks);		}
-uint8_t TMC5160Stepper::otselect()			{ GET_REG(otselect);	}
-uint8_t TMC5160Stepper::drvstrength()		{ GET_REG(drvstrength);	}
-uint8_t TMC5160Stepper::filt_isense()		{ GET_REG(filt_isense);	}
+template<typename T>
+void TMC5160StepperBase<T>::bbmtime(uint8_t B)		{ SET_REG(bbmtime); 	}
+template<typename T>
+void TMC5160StepperBase<T>::bbmclks(uint8_t B)		{ SET_REG(bbmclks); 	}
+template<typename T>
+void TMC5160StepperBase<T>::otselect(uint8_t B)	{ SET_REG(otselect); 	}
+template<typename T>
+void TMC5160StepperBase<T>::drvstrength(uint8_t B)	{ SET_REG(drvstrength); }
+template<typename T>
+void TMC5160StepperBase<T>::filt_isense(uint8_t B)	{ SET_REG(filt_isense); }
+template<typename T>
+uint8_t TMC5160StepperBase<T>::bbmtime()			{ GET_REG(bbmtime);		}
+template<typename T>
+uint8_t TMC5160StepperBase<T>::bbmclks()			{ GET_REG(bbmclks);		}
+template<typename T>
+uint8_t TMC5160StepperBase<T>::otselect()			{ GET_REG(otselect);	}
+template<typename T>
+uint8_t TMC5160StepperBase<T>::drvstrength()		{ GET_REG(drvstrength);	}
+template<typename T>
+uint8_t TMC5160StepperBase<T>::filt_isense()		{ GET_REG(filt_isense);	}

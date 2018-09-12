@@ -5,28 +5,44 @@
 #define GET_REG(SETTING) COOLCONF(); return COOLCONF_register.SETTING;
 
 // COOLCONF
-uint32_t TMC2130Stepper::COOLCONF() { return COOLCONF_register.sr; }
-void TMC2130Stepper::COOLCONF(uint32_t input) {
+template<typename T>
+uint32_t TMC2130StepperBase<T>::COOLCONF() { return COOLCONF_register.sr; }
+template<typename T>
+void TMC2130StepperBase<T>::COOLCONF(uint32_t input) {
 	COOLCONF_register.sr = input;
 	WRITE_REG(COOLCONF);
 }
 
-void TMC2130Stepper::semin(	uint8_t B )	{ SET_REG(semin);	}
-void TMC2130Stepper::seup(	uint8_t B )	{ SET_REG(seup);	}
-void TMC2130Stepper::semax(	uint8_t B )	{ SET_REG(semax);	}
-void TMC2130Stepper::sedn(	uint8_t B )	{ SET_REG(sedn);	}
-void TMC2130Stepper::seimin(bool 	B )	{ SET_REG(seimin);	}
-void TMC2130Stepper::sgt(	int8_t  B )	{ SET_REG(sgt);		}
-void TMC2130Stepper::sfilt(	bool 	B )	{ SET_REG(sfilt);	}
+template<typename T>
+void TMC2130StepperBase<T>::semin(	uint8_t B )	{ SET_REG(semin);	}
+template<typename T>
+void TMC2130StepperBase<T>::seup(	uint8_t B )	{ SET_REG(seup);	}
+template<typename T>
+void TMC2130StepperBase<T>::semax(	uint8_t B )	{ SET_REG(semax);	}
+template<typename T>
+void TMC2130StepperBase<T>::sedn(	uint8_t B )	{ SET_REG(sedn);	}
+template<typename T>
+void TMC2130StepperBase<T>::seimin(bool 	B )	{ SET_REG(seimin);	}
+template<typename T>
+void TMC2130StepperBase<T>::sgt(	int8_t  B )	{ SET_REG(sgt);		}
+template<typename T>
+void TMC2130StepperBase<T>::sfilt(	bool 	B )	{ SET_REG(sfilt);	}
 
-uint8_t TMC2130Stepper::semin()	{ GET_REG(semin);	}
-uint8_t TMC2130Stepper::seup()	{ GET_REG(seup);	}
-uint8_t TMC2130Stepper::semax()	{ GET_REG(semax);	}
-uint8_t TMC2130Stepper::sedn()	{ GET_REG(sedn);	}
-bool 	TMC2130Stepper::seimin(){ GET_REG(seimin);	}
-bool 	TMC2130Stepper::sfilt()	{ GET_REG(sfilt);	}
+template<typename T>
+uint8_t TMC2130StepperBase<T>::semin()	{ GET_REG(semin);	}
+template<typename T>
+uint8_t TMC2130StepperBase<T>::seup()	{ GET_REG(seup);	}
+template<typename T>
+uint8_t TMC2130StepperBase<T>::semax()	{ GET_REG(semax);	}
+template<typename T>
+uint8_t TMC2130StepperBase<T>::sedn()	{ GET_REG(sedn);	}
+template<typename T>
+bool 	TMC2130StepperBase<T>::seimin(){ GET_REG(seimin);	}
+template<typename T>
+bool 	TMC2130StepperBase<T>::sfilt()	{ GET_REG(sfilt);	}
 
-int8_t TMC2130Stepper::sgt() {
+template<typename T>
+int8_t TMC2130StepperBase<T>::sgt() {
 	// Two's complement in a 7bit value
 	int8_t val = (COOLCONF_register.sgt &  0x40) << 1; // Isolate sign bit
 	val |= COOLCONF_register.sgt & 0x7F;
