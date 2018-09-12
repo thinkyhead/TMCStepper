@@ -81,3 +81,4 @@ uint16_t SW_SPIClass::transfer16(uint16_t data) {
   returnVal |= transfer(data&0xFF) & 0xFF;
   return returnVal;
 }
+

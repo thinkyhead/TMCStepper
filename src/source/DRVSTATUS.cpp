@@ -6,7 +6,7 @@
 #define GET_REG10(SETTING) DRVSTATUS(); return READ_RDSEL10_register.SETTING
 
 uint32_t TMC2660Stepper::DRVSTATUS() {
-	uint32_t response = read()&0xFFCFF;
+	uint32_t response = SELF.read()&0xFFCFF;
 	READ_RDSEL00_register.sr = response & 0xFF;
 	READ_RDSEL01_register.sr = response & 0xFF;
 	READ_RDSEL10_register.sr = response & 0xFF;
@@ -41,4 +41,16 @@ uint16_t TMC2660Stepper::sg_result(){
 	}
 	return out;
 }
+
+// Explicit instantiation of all possible templates (linker will remove unused ones)
+template class TMCStepper<TMC2130Stepper>;
+template class TMCStepper<TMC5130Stepper>;
+template class TMCStepper<TMC5160Stepper>;
+template class TMCStepper<TMC2208Stepper>;
+template class TMCStepper<TMC2224Stepper>;
+template class TMC2130StepperBase<TMC2130Stepper>;
+template class TMC5130StepperBase<TMC5130Stepper>;
+template class TMC5160StepperBase<TMC5160Stepper>;
+template class TMC2208StepperBase<TMC2208Stepper>;
+template class TMC2208StepperBase<TMC2224Stepper>;
 
