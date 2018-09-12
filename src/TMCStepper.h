@@ -33,7 +33,7 @@
 
 #define SELF this->self()
 
-template <class T>
+template <typename T>
 class TMCStepper {
 	public:
 		void rms_current(uint16_t mA);
@@ -94,9 +94,6 @@ class TMCStepper {
 		TMCStepper() {};
 		TMCStepper(float RS) : Rsense(RS) {};
 
-	  T& self() { return *static_cast<T*>(this); }
-	  const T& self() const { return *static_cast<const T*>(this); }
-
 		INIT_REGISTER(GSTAT){0x01, {.sr=0}};
 		INIT_REGISTER(IHOLD_IRUN){0x10, {.sr=0}};
 		INIT_REGISTER(TPOWERDOWN){0x11, .sr=0};
@@ -111,9 +108,13 @@ class TMCStepper {
 		float Rsense;
 		bool _started = 0;
 		float holdMultiplier = 0.5;
+		
+	public:
+	  T& self() { return *static_cast<T*>(this); }
+	  const T& self() const { return *static_cast<const T*>(this); }
 };
 
-template <class T>
+template <typename T>
 class TMC2130StepperBase : public TMCStepper<T> {
 	public:
 		TMC2130StepperBase(uint16_t pinCS, float RS);
@@ -297,10 +298,11 @@ class TMC2130StepperBase : public TMCStepper<T> {
 
 		// Function aliases
 
-		//protected:
+	public:
 		void write(uint8_t addressByte, uint32_t config);
 		uint32_t read(uint8_t addressByte);
 
+	public:
 		INIT_REGISTER(GCONF){0x00, {.sr=0}};
 		INIT_REGISTER(IOIN){0x04, {.sr=0}};
 		INIT_REGISTER(TCOOLTHRS){0x14, .sr=0};
@@ -329,7 +331,7 @@ class TMC2130Stepper : public TMC2130StepperBase<TMC2130Stepper> {
 		: TMC2130StepperBase<TMC2130Stepper>(pinCS, RS, pinMOSI, pinMISO, pinSCK) {}
 };
 
-template <class T>
+template <typename T>
 class TMC5130StepperBase : public TMC2130StepperBase<T> {
 	public:
 		TMC5130StepperBase(uint16_t pinCS);
@@ -525,7 +527,7 @@ class TMC5130Stepper : public TMC5130StepperBase<TMC5130Stepper> {
 		: TMC5130StepperBase<TMC5130Stepper>(pinCS, RS) {}
 };
 
-template <class T>
+template <typename T>
 class TMC5160StepperBase : public TMC5130StepperBase<T> {
 	public:
 		TMC5160StepperBase(uint16_t pinCS, float RS);
@@ -617,7 +619,7 @@ class TMC5160StepperBase : public TMC5130StepperBase<T> {
 		uint8_t pwm_reg();
 		bool pwm_autograd();
 
-	private:
+	public:
 		using TMC5130StepperBase<T>::I_scale_analog;
 		using TMC5130StepperBase<T>::internal_Rsense;
 		using TMC5130StepperBase<T>::enc_commutation;
@@ -643,7 +645,7 @@ class TMC5160Stepper : public TMC5160StepperBase<TMC5160Stepper> {
 		: TMC5160StepperBase<TMC5160Stepper>(pinCS, RS) {}
 };
 
-template <class T>
+template <typename T>
 class TMC2208StepperBase : public TMCStepper<T> {
 	public:
 		//TMC2208Stepper(HardwareSerial& serial);
@@ -815,8 +817,10 @@ class TMC2208StepperBase : public TMCStepper<T> {
 		#if SW_CAPABLE_PLATFORM
 			SoftwareSerial * SWSerial = NULL;
 		#endif
+	public:
 		void write(uint8_t, uint32_t);
 		uint32_t read(uint8_t);
+	protected:
 		uint8_t calcCRC(uint8_t datagram[], uint8_t len);
 		static constexpr uint8_t  TMC2208_SYNC = 0x05,
 															TMC2208_SLAVE_ADDR = 0x00;
@@ -845,13 +849,13 @@ class TMC2224Stepper : public TMC2208StepperBase<TMC2224Stepper> {
 		bool sel_a();
 		bool dir();
 		uint8_t version();
-	protected:
+	public:
 		IOIN_2224_t IOIN_register = IOIN_2224_t{0x06, {.sr=0}};
 
 };
 
 class TMC2660Stepper {
-	protected:
+	public:
 		TMC2660Stepper& self() { return *this; }
 		const TMC2660Stepper& self() const { return *this; }
 

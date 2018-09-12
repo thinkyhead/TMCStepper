@@ -17,3 +17,16 @@ void TMC2660Stepper::cs(uint8_t B) 	{ SET_REG(cs); }
 bool TMC2660Stepper::sfilt() { GET_REG(sfilt); }
 uint8_t TMC2660Stepper::sgt(){ GET_REG(sgt); }
 uint8_t TMC2660Stepper::cs() { GET_REG(cs); }
+
+// Explicit instantiation of all possible templates (linker will remove unused ones)
+template class TMCStepper<TMC2130Stepper>;
+template class TMCStepper<TMC5130Stepper>;
+template class TMCStepper<TMC5160Stepper>;
+template class TMCStepper<TMC2208Stepper>;
+template class TMCStepper<TMC2224Stepper>;
+template class TMC2130StepperBase<TMC2130Stepper>;
+template class TMC5130StepperBase<TMC5130Stepper>;
+template class TMC5160StepperBase<TMC5160Stepper>;
+template class TMC2208StepperBase<TMC2208Stepper>;
+template class TMC2208StepperBase<TMC2224Stepper>;
+

@@ -1,7 +1,7 @@
 #include "TMCStepper.h"
 #include "TMC_MACROS.h"
 
-#define GET_REG(SETTING) DRV_STATUS(); return DRV_STATUS_register.SETTING;
+#define GET_REG(SETTING) SELF.DRV_STATUS(); return DRV_STATUS_register.SETTING;
 
 template<typename T>
 uint32_t TMC2130StepperBase<T>::DRV_STATUS() {
@@ -69,3 +69,16 @@ template<typename T>
 bool TMC2208StepperBase<T>::stealth() 	{ GET_REG(stealth);		}
 template<typename T>
 bool TMC2208StepperBase<T>::stst() 		{ GET_REG(stst); 		}
+
+// Explicit instantiation of all possible templates (linker will remove unused ones)
+template class TMCStepper<TMC2130Stepper>;
+template class TMCStepper<TMC5130Stepper>;
+template class TMCStepper<TMC5160Stepper>;
+template class TMCStepper<TMC2208Stepper>;
+template class TMCStepper<TMC2224Stepper>;
+template class TMC2130StepperBase<TMC2130Stepper>;
+template class TMC5130StepperBase<TMC5130Stepper>;
+template class TMC5160StepperBase<TMC5160Stepper>;
+template class TMC2208StepperBase<TMC2208Stepper>;
+template class TMC2208StepperBase<TMC2224Stepper>;
+

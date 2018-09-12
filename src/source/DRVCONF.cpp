@@ -27,3 +27,16 @@ uint8_t	 TMC2660Stepper::ts2g()		{ GET_REG(ts2g);	}
 bool	 TMC2660Stepper::sdoff()	{ GET_REG(sdoff);	}
 bool	 TMC2660Stepper::vsense()	{ GET_REG(vsense);	}
 uint8_t	 TMC2660Stepper::rdsel()	{ GET_REG(rdsel);	}
+
+// Explicit instantiation of all possible templates (linker will remove unused ones)
+template class TMCStepper<TMC2130Stepper>;
+template class TMCStepper<TMC5130Stepper>;
+template class TMCStepper<TMC5160Stepper>;
+template class TMCStepper<TMC2208Stepper>;
+template class TMCStepper<TMC2224Stepper>;
+template class TMC2130StepperBase<TMC2130Stepper>;
+template class TMC5130StepperBase<TMC5130Stepper>;
+template class TMC5160StepperBase<TMC5160Stepper>;
+template class TMC2208StepperBase<TMC2208Stepper>;
+template class TMC2208StepperBase<TMC2224Stepper>;
+

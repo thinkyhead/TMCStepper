@@ -56,7 +56,7 @@ uint8_t TMC5160StepperBase<T>::GLOBAL_SCALER() { return GLOBAL_SCALER_register.s
 template<typename T>
 void TMC5160StepperBase<T>::GLOBAL_SCALER(uint8_t input) {
   GLOBAL_SCALER_register.sr = input;
-  this->write(GLOBAL_SCALER_register.address, GLOBAL_SCALER_register.sr);
+  SELF.write(GLOBAL_SCALER_register.address, GLOBAL_SCALER_register.sr);
 }
 
 // R: OFFSET_READ
@@ -68,7 +68,7 @@ template<typename T>
 uint8_t TMC5160StepperBase<T>::ENC_STATUS() { return READ_REG(ENC_STATUS); }
 template<typename T>
 void TMC5160StepperBase<T>::ENC_STATUS(uint8_t input) {
-	this->write(this->ENC_STATUS_register.address, input & 0x3);
+	SELF.write(this->ENC_STATUS_register.address, input & 0x3);
 }
 
 // W: ENC_DEVIATION
@@ -77,7 +77,7 @@ uint32_t TMC5160StepperBase<T>::ENC_DEVIATION() { return this->ENC_DEVIATION_reg
 template<typename T>
 void TMC5160StepperBase<T>::ENC_DEVIATION(uint32_t input) {
 	ENC_DEVIATION_register.sr = input;
-	this->write(this->ENC_DEVIATION_register.address, this->ENC_DEVIATION_register.sr);
+	SELF.write(this->ENC_DEVIATION_register.address, this->ENC_DEVIATION_register.sr);
 }
 
 // R: PWM_SCALE
@@ -101,3 +101,16 @@ template<typename T>
 uint8_t TMC5160StepperBase<T>::pwm_ofs_auto() { PWM_AUTO(); return PWM_AUTO_register.pwm_ofs_auto; }
 template<typename T>
 uint8_t TMC5160StepperBase<T>::pwm_grad_auto() { PWM_AUTO(); return PWM_AUTO_register.pwm_grad_auto; }
+
+// Explicit instantiation of all possible templates (linker will remove unused ones)
+template class TMCStepper<TMC2130Stepper>;
+template class TMCStepper<TMC5130Stepper>;
+template class TMCStepper<TMC5160Stepper>;
+template class TMCStepper<TMC2208Stepper>;
+template class TMCStepper<TMC2224Stepper>;
+template class TMC2130StepperBase<TMC2130Stepper>;
+template class TMC5130StepperBase<TMC5130Stepper>;
+template class TMC5160StepperBase<TMC5160Stepper>;
+template class TMC2208StepperBase<TMC2208Stepper>;
+template class TMC2208StepperBase<TMC2224Stepper>;
+

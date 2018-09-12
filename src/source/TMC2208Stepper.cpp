@@ -27,15 +27,15 @@ TMC2208StepperBase<T>::TMC2208StepperBase(Stream * SerialPort, float RS, bool ha
 
 template<typename T>
 void TMC2208StepperBase<T>::push() {
-	GCONF(this->GCONF_register.sr);
-	IHOLD_IRUN(this->IHOLD_IRUN_register.sr);
-	SLAVECONF(this->SLAVECONF_register.sr);
-	FACTORY_CONF(this->FACTORY_CONF_register.sr);
-	TPOWERDOWN(this->TPOWERDOWN_register.sr);
-	TPWMTHRS(this->TPWMTHRS_register.sr);
-	VACTUAL(this->VACTUAL_register.sr);
-	CHOPCONF(this->CHOPCONF_register.sr);
-	PWMCONF(this->PWMCONF_register.sr);
+	this->GCONF(this->GCONF_register.sr);
+	this->IHOLD_IRUN(this->IHOLD_IRUN_register.sr);
+	this->SLAVECONF(this->SLAVECONF_register.sr);
+	this->FACTORY_CONF(this->FACTORY_CONF_register.sr);
+	this->TPOWERDOWN(this->TPOWERDOWN_register.sr);
+	this->TPWMTHRS(this->TPWMTHRS_register.sr);
+	this->VACTUAL(this->VACTUAL_register.sr);
+	this->CHOPCONF(this->CHOPCONF_register.sr);
+	this->PWMCONF(this->PWMCONF_register.sr);
 }
 
 template<typename T>
@@ -146,12 +146,12 @@ uint8_t TMC2208StepperBase<T>::senddelay() 		{ return SLAVECONF_register.senddel
 
 template<typename T>
 void TMC2208StepperBase<T>::OTP_PROG(uint16_t input) {
-	this->write(OTP_PROG_register.address, input);
+	SELF.write(OTP_PROG_register.address, input);
 }
 
 template<typename T>
 uint32_t TMC2208StepperBase<T>::OTP_READ() {
-	return this->read(OTP_READ_register.address);
+	return SELF.read(OTP_READ_register.address);
 }
 
 template<typename T>
@@ -241,3 +241,16 @@ int16_t TMC2208StepperBase<T>::pwm_scale_auto() {
 	else return response;
 	*/
 }
+
+// Explicit instantiation of all possible templates (linker will remove unused ones)
+template class TMCStepper<TMC2130Stepper>;
+template class TMCStepper<TMC5130Stepper>;
+template class TMCStepper<TMC5160Stepper>;
+template class TMCStepper<TMC2208Stepper>;
+template class TMCStepper<TMC2224Stepper>;
+template class TMC2130StepperBase<TMC2130Stepper>;
+template class TMC5130StepperBase<TMC5130Stepper>;
+template class TMC5160StepperBase<TMC5160Stepper>;
+template class TMC2208StepperBase<TMC2208Stepper>;
+template class TMC2208StepperBase<TMC2224Stepper>;
+

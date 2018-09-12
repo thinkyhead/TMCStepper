@@ -22,7 +22,7 @@ void TMC2130StepperBase<T>::setSPISpeed(uint32_t speed) {
 template<typename T>
 void TMC2130StepperBase<T>::switchCSpin(bool state) {
   // Allows for overriding in child class to make use of fast io
-  digitalWrite(_pinCS(), state);
+  digitalWrite(_pinCS, state);
 }
 
 template<typename T>
@@ -102,10 +102,10 @@ void TMC2130StepperBase<T>::begin() {
   CHOPCONF(CHOPCONF_register.sr);
   COOLCONF(COOLCONF_register.sr);
   PWMCONF(PWMCONF_register.sr);
-  IHOLD_IRUN(this->IHOLD_IRUN_register.sr);
+  this->IHOLD_IRUN(this->IHOLD_IRUN_register.sr);
 
   toff(8); //off_time(8);
-  tbl(1); //blank_time(24);
+  SELF.tbl(1); //blank_time(24);
 
   this->_started = true;
 }
@@ -119,18 +119,18 @@ bool TMC2130StepperBase<T>::isEnabled() { return !drv_enn_cfg6() && toff(); }
 
 template<typename T>
 void TMC2130StepperBase<T>::push() {
-  GCONF(GCONF_register.sr);
-  IHOLD_IRUN(this->IHOLD_IRUN_register.sr);
-  TPOWERDOWN(this->TPOWERDOWN_register.sr);
-  TPWMTHRS(this->TPWMTHRS_register.sr);
-  TCOOLTHRS(this->TCOOLTHRS_register.sr);
-  THIGH(this->THIGH_register.sr);
-  XDIRECT(this->XDIRECT_register.sr);
-  VDCMIN(this->VDCMIN_register.sr);
-  CHOPCONF(this->CHOPCONF_register.sr);
-  COOLCONF(this->COOLCONF_register.sr);
-  PWMCONF(this->PWMCONF_register.sr);
-  ENCM_CTRL(this->ENCM_CTRL_register.sr);
+  this->GCONF(GCONF_register.sr);
+  this->IHOLD_IRUN(this->IHOLD_IRUN_register.sr);
+  this->TPOWERDOWN(this->TPOWERDOWN_register.sr);
+  this->TPWMTHRS(this->TPWMTHRS_register.sr);
+  this->TCOOLTHRS(this->TCOOLTHRS_register.sr);
+  this->THIGH(this->THIGH_register.sr);
+  this->XDIRECT(this->XDIRECT_register.sr);
+  this->VDCMIN(this->VDCMIN_register.sr);
+  this->CHOPCONF(this->CHOPCONF_register.sr);
+  this->COOLCONF(this->COOLCONF_register.sr);
+  this->PWMCONF(this->PWMCONF_register.sr);
+  this->ENCM_CTRL(this->ENCM_CTRL_register.sr);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -161,7 +161,7 @@ uint32_t TMC2130StepperBase<T>::TCOOLTHRS() { return TCOOLTHRS_register.sr; }
 template<typename T>
 void TMC2130StepperBase<T>::TCOOLTHRS(uint32_t input) {
   TCOOLTHRS_register.sr = input;
-  this->write(TCOOLTHRS_register.address, TCOOLTHRS_register.sr);
+  SELF.write(TCOOLTHRS_register.address, TCOOLTHRS_register.sr);
 }
 ///////////////////////////////////////////////////////////////////////////////////////
 // W: THIGH
@@ -170,7 +170,7 @@ uint32_t TMC2130StepperBase<T>::THIGH() { return THIGH_register.sr; }
 template<typename T>
 void TMC2130StepperBase<T>::THIGH(uint32_t input) {
   THIGH_register.sr = input;
-  this->write(THIGH_register.address, THIGH_register.sr);
+  SELF.write(THIGH_register.address, THIGH_register.sr);
 }
 ///////////////////////////////////////////////////////////////////////////////////////
 // RW: XDIRECT
@@ -199,7 +199,7 @@ uint32_t TMC2130StepperBase<T>::VDCMIN() { return VDCMIN_register.sr; }
 template<typename T>
 void TMC2130StepperBase<T>::VDCMIN(uint32_t input) {
   VDCMIN_register.sr = input;
-  this->write(VDCMIN_register.address, VDCMIN_register.sr);
+  SELF.write(VDCMIN_register.address, VDCMIN_register.sr);
 }
 ///////////////////////////////////////////////////////////////////////////////////////
 // R: PWM_SCALE
@@ -246,3 +246,16 @@ uint8_t TMC2130StepperBase<T>::sg_current_decrease() {
   }
   return 0;
 }
+
+// Explicit instantiation of all possible templates (linker will remove unused ones)
+template class TMCStepper<TMC2130Stepper>;
+template class TMCStepper<TMC5130Stepper>;
+template class TMCStepper<TMC5160Stepper>;
+template class TMCStepper<TMC2208Stepper>;
+template class TMCStepper<TMC2224Stepper>;
+template class TMC2130StepperBase<TMC2130Stepper>;
+template class TMC5130StepperBase<TMC5130Stepper>;
+template class TMC5160StepperBase<TMC5160Stepper>;
+template class TMC2208StepperBase<TMC2208Stepper>;
+template class TMC2208StepperBase<TMC2224Stepper>;
+
