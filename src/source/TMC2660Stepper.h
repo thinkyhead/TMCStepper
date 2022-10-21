@@ -165,6 +165,7 @@ class TMC2660Stepper {
 		const uint16_t _pinMISO;
 		const uint16_t _pinMOSI;
 		const uint16_t _pinSCK;
+		const bool _has_pins;
 		const float Rsense;
 		static constexpr float default_RS = 0.1;
 		float holdMultiplier = 0.5;
