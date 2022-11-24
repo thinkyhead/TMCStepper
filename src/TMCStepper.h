@@ -26,7 +26,9 @@
 
 #if defined(ARDUINO) && ARDUINO >= 100
 	#include <Arduino.h>
-	#include <SPI.h>
+	#ifndef TMC_NO_GENERIC_SPI
+		#include <SPI.h>
+	#endif
 	#include <Stream.h>
 #elif defined(bcm2835)
 	#include <bcm2835.h>
@@ -36,8 +38,12 @@
 	#if __has_include(<Arduino.h>)
 		#include <Arduino.h>
 	#endif
-	#if __has_include(<SPI.h>)
-		#include <SPI.h>
+	#ifndef TMC_NO_GENERIC_SPI
+		#if __has_include(<SPI.h>)
+			#include <SPI.h>
+		#else
+			#define TMC_NO_GENERIC_SPI
+		#endif
 	#endif
 	#if __has_include(<Stream.h>)
 		#include <Stream.h>

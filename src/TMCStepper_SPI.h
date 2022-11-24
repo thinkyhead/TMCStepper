@@ -14,3 +14,9 @@ struct TMCSPIInterface {
     virtual uint8_t transfer(uint8_t txval) = 0;
     virtual void sendRepeat(uint8_t val, uint16_t repcnt) = 0;
 };
+
+#ifndef TMC_NO_GENERIC_SPI
+#define _TMC_SOFTSPI_DEFAULT false
+#else
+#define _TMC_SOFTSPI_DEFAULT true
+#endif
