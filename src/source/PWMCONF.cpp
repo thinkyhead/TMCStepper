@@ -1,10 +1,18 @@
+/**
+ * TMCStepper library by @teemuatlut
+ * PWMCONF.cpp - PWM Configuration
+ * TMC2130 (TMC2160, TMC5130, TMC5160, TMC5161), TMC2160 (TMC5130, TMC5160, TMC5161), TMC2208 (TMC2209, TMC2224)
+ */
 #include "TMCStepper.h"
 #include "TMC_MACROS.h"
 
 #define SET_REG(SETTING) PWMCONF_register.SETTING = B; write(PWMCONF_register.address, PWMCONF_register.sr)
 #define GET_REG(SETTING) return PWMCONF_register.SETTING
 
-// PWMCONF
+//
+// TMC2130 (TMC2160, TMC5130, TMC5160, TMC5161)
+//
+
 uint32_t TMC2130Stepper::PWMCONF() { return PWMCONF_register.sr; }
 void TMC2130Stepper::PWMCONF(uint32_t input) {
 	PWMCONF_register.sr = input;
@@ -24,6 +32,10 @@ uint8_t TMC2130Stepper::pwm_freq()		{ GET_REG(pwm_freq);		}
 bool 	TMC2130Stepper::pwm_autoscale()	{ GET_REG(pwm_autoscale);	}
 bool 	TMC2130Stepper::pwm_symmetric()	{ GET_REG(pwm_symmetric);	}
 uint8_t TMC2130Stepper::freewheel()		{ GET_REG(freewheel);		}
+
+//
+// TMC2160 (TMC5130, TMC5160, TMC5161)
+//
 
 uint32_t TMC2160Stepper::PWMCONF() {
 	return PWMCONF_register.sr;
@@ -50,6 +62,10 @@ bool 	TMC2160Stepper::pwm_autograd()	{ return PWMCONF_register.pwm_autograd;	}
 uint8_t TMC2160Stepper::freewheel()		{ return PWMCONF_register.freewheel;	}
 uint8_t TMC2160Stepper::pwm_reg()		{ return PWMCONF_register.pwm_reg;		}
 uint8_t TMC2160Stepper::pwm_lim()		{ return PWMCONF_register.pwm_lim;		}
+
+//
+// TMC2208 (TMC2209, TMC2224)
+//
 
 uint32_t TMC2208Stepper::PWMCONF() {
 	return read(PWMCONF_register.address);

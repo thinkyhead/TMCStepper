@@ -1,4 +1,8 @@
-#if defined(bcm2835)
+/**
+ * BCM2835 Serial Stream for Arduino on Raspberry Pi
+ */
+#ifdef bcm2835
+
 #include <cstring>
 #include <termios.h>
 #include <sys/ioctl.h>
@@ -122,4 +126,4 @@ uint8_t Stream::read()
 Stream Serial("/dev/serial0");
 Stream Serial1("/dev/serial1");
 
-#endif
+#endif // bcm2835

@@ -1,9 +1,17 @@
+/**
+ * TMCStepper library by @teemuatlut
+ * ENCMODE.cpp - Driver Status
+ * TMC2130 (TMC2160, TMC5130, TMC5160, TMC5161), TMC5160 (TMC5161), TMC2208 (TMC2209, TMC2224)
+ */
 #include "TMCStepper.h"
 #include "TMC_MACROS.h"
 
 #define SET_REG(SETTING) GCONF_register.SETTING = B; write(GCONF_register.address, GCONF_register.sr)
 
-// GCONF
+//
+// TMC2130 (TMC2160, TMC5130, TMC5160, TMC5161)
+//
+
 uint32_t TMC2130Stepper::GCONF() {
 	return read(GCONF_register.address);
 }
@@ -48,6 +56,10 @@ bool TMC2130Stepper::small_hysteresis() 			{ GCONF_t r{0}; r.sr = GCONF(); retur
 bool TMC2130Stepper::stop_enable() 					{ GCONF_t r{0}; r.sr = GCONF(); return r.stop_enable;			}
 bool TMC2130Stepper::direct_mode() 					{ GCONF_t r{0}; r.sr = GCONF(); return r.direct_mode;			}
 
+//
+// TMC5160 (TMC5161)
+//
+
 /*
 bit 18 not implemented:
 test_mode 0:
@@ -63,6 +75,10 @@ void TMC5160Stepper::multistep_filt(bool B)			{ SET_REG(multistep_filt); 			}
 bool TMC5160Stepper::recalibrate()					{ GCONF_t r{0}; r.sr = GCONF(); return r.recalibrate;	}
 bool TMC5160Stepper::faststandstill()				{ GCONF_t r{0}; r.sr = GCONF(); return r.faststandstill;	}
 bool TMC5160Stepper::multistep_filt()				{ GCONF_t r{0}; r.sr = GCONF(); return r.multistep_filt;	}
+
+//
+// TMC2208 (TMC2209, TMC2224)
+//
 
 uint32_t TMC2208Stepper::GCONF() {
 	return read(GCONF_register.address);

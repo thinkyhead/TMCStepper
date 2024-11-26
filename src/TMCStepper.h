@@ -1,3 +1,20 @@
+/**
+ * TMCStepper library by @teemuatlut
+ *
+ * TMCStepper.h
+ * Classes for all stepper types. Inheritance hierarchy:
+ *
+ * TMCStepper
+ *   TMC2130Stepper
+ *     TMC2160Stepper
+ *       TMC5130Stepper
+ *         TMC5160Stepper
+ *           TMC5161Stepper
+ *   TMC2208Stepper
+ *     TMC2209Stepper
+ *     TMC2224Stepper
+ * TMC2660Stepper
+ */
 #pragma once
 
 //#define TMCDEBUG
