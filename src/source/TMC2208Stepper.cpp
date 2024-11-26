@@ -20,19 +20,29 @@ TMC2208Stepper::TMC2208Stepper(Stream * SerialPort, float RS, uint8_t addr) :
 		slave_address(addr),
 		write_only(!has_rx)
 		{
-			SW_RX = SW_RX_pin;
-			SW_TX = SW_TX_pin;
-			auto *SWSerialObj = new arduino_due::soft_uart::serial<arduino_due::soft_uart::timer_ids::TIMER_TC4, 256, 256>();
+			#ifdef ARDUINO_ARCH_SAM
+				SW_RX = SW_RX_pin;
+				SW_TX = SW_TX_pin;
+				auto *SWSerialObj = new arduino_due::soft_uart::serial<arduino_due::soft_uart::timer_ids::TIMER_TC4, 256, 256>();
+			#else
+				SoftwareSerial *SWSerialObj = new SoftwareSerial(SW_RX_pin, SW_TX_pin);
+			#endif
 			SWSerial = SWSerialObj;
 			defaults();
 		}
 
 	void TMC2208Stepper::beginSerial(uint32_t baudrate) {
-		if (SWSerial != NULL) SWSerial->begin(SW_RX, SW_TX, baudrate,
-		                                      arduino_due::soft_uart::data_bit_codes::EIGHT_BITS,
-		                                      arduino_due::soft_uart::parity_codes::NO_PARITY,
-		                                      arduino_due::soft_uart::stop_bit_codes::ONE_STOP_BIT
-		                                     );
+		if (SWSerial != NULL) {
+			#ifdef ARDUINO_ARCH_SAM
+				SWSerial->begin(SW_RX, SW_TX, baudrate,
+					arduino_due::soft_uart::data_bit_codes::EIGHT_BITS,
+					arduino_due::soft_uart::parity_codes::NO_PARITY,
+					arduino_due::soft_uart::stop_bit_codes::ONE_STOP_BIT
+				);
+			#else
+				SWSerial->begin(baudrate);
+			#endif
+		}
 	}
 #endif
 
@@ -183,9 +193,13 @@ uint32_t TMC2208Stepper::read(uint8_t addr) {
 	for (uint8_t i = 0; i < max_retries; i++) {
 		#if SW_CAPABLE_PLATFORM
 			if (SWSerial != NULL) {
-					//SWSerial.listen();
-					out = _sendDatagram(*SWSerial, datagram, len, abort_window);
-					//SWSerial.stopListening();
+				#ifndef ARDUINO_ARCH_SAM
+					SWSerial.listen();
+				#endif
+				out = _sendDatagram(*SWSerial, datagram, len, abort_window);
+				#ifndef ARDUINO_ARCH_SAM
+					SWSerial.stopListening();
+				#endif
 			} else
 		#endif
 			{
@@ -197,7 +211,7 @@ uint32_t TMC2208Stepper::read(uint8_t addr) {
 		CRCerror = false;
 		uint8_t out_datagram[] = {(uint8_t)(out>>56), (uint8_t)(out>>48), (uint8_t)(out>>40), (uint8_t)(out>>32), (uint8_t)(out>>24), (uint8_t)(out>>16), (uint8_t)(out>>8), (uint8_t)(out>>0)};
 		uint8_t crc = calcCRC(out_datagram, 7);
-		if ((crc != (uint8_t)out) || crc == 0 ) {
+		if ((crc != (uint8_t)out) || crc == 0) {
 			CRCerror = true;
 			out = 0;
 		} else {
