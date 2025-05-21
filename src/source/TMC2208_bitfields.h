@@ -43,11 +43,11 @@ namespace TMC2208_n {
       uint32_t sr;
       struct {
         bool  enn : 1,
-              : 1,
+                  : 1,
               ms1 : 1,
               ms2 : 1,
               diag : 1,
-              : 1,
+                   : 1,
               pdn_uart : 1,
               step : 1,
               sel_a : 1,

@@ -10,6 +10,7 @@ This library works with any Arduino compatible board (Arduino, STM32, NXP, etc) 
 | [TMC2208](//teemuatlut.github.io/TMCStepper/class_t_m_c2208_stepper.html) | ✅      | 4.75…36V     | 1.4A          | UART      | ❌          | ❌           | ✅ v2 |
 | [TMC2209](//teemuatlut.github.io/TMCStepper/class_t_m_c2209_stepper.html) | ✅      | 4.75…29V     | 2.0A          | UART      | ✅          | ✅ v4        | ✅ v2 |
 | [TMC2224](//teemuatlut.github.io/TMCStepper/class_t_m_c2224_stepper.html) | ✅      | 4.75…36V     | 1.4A          | UART      | ❌          | ❌           | ✅ v2 |
+| TMC2240 | ✅      | 4.75…36V     | 1.4A          | SPI       | ✅          | ✅           | ✅ v2 |
 | [TMC2660](//teemuatlut.github.io/TMCStepper/class_t_m_c2660_stepper.html) | ✅      | 9…30V        | 2.8A          | SPI       | ✅          | ✅ v2        | ❌    |
 | [TMC5130](//teemuatlut.github.io/TMCStepper/class_t_m_c5130_stepper.html) | ✅      | 4.75…46V     | 1.4A          | SPI only  | ✅          | ✅ v2        | ✅ v1 |
 | [TMC5160](//teemuatlut.github.io/TMCStepper/class_t_m_c5160_stepper.html) | ✅      | 8…60V        | ext. MOSFETs  | SPI only  | ✅          | ✅ v2        | ✅ v2 |

@@ -133,26 +133,6 @@ void TMC2160Stepper::push() {
   GLOBAL_SCALER(GLOBAL_SCALER_register.sr);
 }
 
-///////////////////////////////////////////////////////////////////////////////////////
-// R: IOIN
-uint32_t  TMC2160Stepper::IOIN() {
-  return read(TMC2160_n::IOIN_t::address);
-}
-bool    TMC2160Stepper::refl_step()      { TMC2160_n::IOIN_t r{0}; r.sr = IOIN(); return r.refl_step; }
-bool    TMC2160Stepper::refr_dir()       { TMC2160_n::IOIN_t r{0}; r.sr = IOIN(); return r.refr_dir; }
-bool    TMC2160Stepper::encb_dcen_cfg4() { TMC2160_n::IOIN_t r{0}; r.sr = IOIN(); return r.encb_dcen_cfg4; }
-bool    TMC2160Stepper::enca_dcin_cfg5() { TMC2160_n::IOIN_t r{0}; r.sr = IOIN(); return r.enca_dcin_cfg5; }
-bool    TMC2160Stepper::drv_enn()        { TMC2160_n::IOIN_t r{0}; r.sr = IOIN(); return r.drv_enn; }
-bool    TMC2160Stepper::dco_cfg6()       { TMC2160_n::IOIN_t r{0}; r.sr = IOIN(); return r.dco_cfg6; }
-uint8_t TMC2160Stepper::version()        { TMC2160_n::IOIN_t r{0}; r.sr = IOIN(); return r.version; }
-
-// W: GLOBAL_SCALER
-uint8_t TMC2160Stepper::GLOBAL_SCALER() { return GLOBAL_SCALER_register.sr; }
-void TMC2160Stepper::GLOBAL_SCALER(uint8_t input) {
-  GLOBAL_SCALER_register.sr = input;
-  write(GLOBAL_SCALER_register.address, GLOBAL_SCALER_register.sr);
-}
-
 // R: OFFSET_READ
 uint16_t TMC2160Stepper::OFFSET_READ() { return read(OFFSET_READ_t::address); }
 
