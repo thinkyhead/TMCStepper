@@ -1,9 +1,17 @@
+/**
+ * TMCStepper library by @teemuatlut
+ * CHOPCONF.cpp - CHOPCONF Chopper Configuration
+ * TMC2130 (TMC2160, TMC5130, TMC5160, TMC5161), TMC5160, TMC2208 (TMC2209, TMC2224), TMC2660
+ */
 #include "TMCStepper.h"
 #include "TMC_MACROS.h"
 
 #define SET_REG(SETTING) CHOPCONF_register.SETTING = B; write(CHOPCONF_register.address, CHOPCONF_register.sr)
 
-// CHOPCONF
+//
+// TMC2130 (TMC2160, TMC5130, TMC5160, TMC5161)
+//
+
 uint32_t TMC2130Stepper::CHOPCONF() {
 	return read(CHOPCONF_register.address);
 }
@@ -46,10 +54,18 @@ bool 	TMC2130Stepper::intpol()	{ CHOPCONF_t r{0}; r.sr = CHOPCONF(); return r.in
 bool 	TMC2130Stepper::dedge()		{ CHOPCONF_t r{0}; r.sr = CHOPCONF(); return r.dedge;	}
 bool 	TMC2130Stepper::diss2g()	{ CHOPCONF_t r{0}; r.sr = CHOPCONF(); return r.diss2g;	}
 
+//
+// TMC5160 (TMC5161)
+//
+
 void TMC5160Stepper::diss2vs(bool B){ SET_REG(diss2vs); }
 void TMC5160Stepper::tpfd(uint8_t B){ SET_REG(tpfd);	}
 bool TMC5160Stepper::diss2vs()		{ CHOPCONF_t r{0}; r.sr = CHOPCONF(); return r.diss2vs; }
 uint8_t TMC5160Stepper::tpfd()		{ CHOPCONF_t r{0}; r.sr = CHOPCONF(); return r.tpfd;	}
+
+//
+// TMC2208 (TMC2209, TMC2224)
+//
 
 void TMC2208Stepper::CHOPCONF(uint32_t input) {
 	CHOPCONF_register.sr = input;
@@ -79,6 +95,10 @@ bool 	TMC2208Stepper::intpol()	{ TMC2208_n::CHOPCONF_t r{0}; r.sr = CHOPCONF(); 
 bool 	TMC2208Stepper::dedge()		{ TMC2208_n::CHOPCONF_t r{0}; r.sr = CHOPCONF(); return r.dedge; 	}
 bool 	TMC2208Stepper::diss2g()	{ TMC2208_n::CHOPCONF_t r{0}; r.sr = CHOPCONF(); return r.diss2g; 	}
 bool 	TMC2208Stepper::diss2vs()	{ TMC2208_n::CHOPCONF_t r{0}; r.sr = CHOPCONF(); return r.diss2vs; 	}
+
+//
+// TMC2660
+//
 
 #define GET_REG_2660(SETTING) return CHOPCONF_register.SETTING;
 

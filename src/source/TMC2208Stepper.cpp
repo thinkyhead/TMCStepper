@@ -1,3 +1,8 @@
+/**
+ * TMCStepper library by @teemuatlut
+ * TMC2208Stepper.cpp
+ * Implementing methods for TMC2208 (TMC2209, TMC2224)
+ */
 #include "TMCStepper.h"
 #include "TMC_MACROS.h"
 #include "SERIAL_SWITCH.h"
@@ -63,8 +68,8 @@ void TMC2208Stepper::defaults() {
 	GCONF_register.multistep_filt = 1; // OTP
 	IHOLD_IRUN_register.iholddelay = 1; // OTP
 	TPOWERDOWN_register.sr = 20;
-	CHOPCONF_register.sr = 0x10000053;
-	PWMCONF_register.sr = 0xC10D0024;
+	CHOPCONF_register.sr = 0x10000053; // 1/16 x 256 single-edge
+	PWMCONF_register.sr = 0xC10D0024; // autoscale=1, freq=01, grad & amp, freewheel=00
   //MSLUT0_register.sr = ???;
   //MSLUT1_register.sr = ???;
   //MSLUT2_register.sr = ???;

@@ -1,3 +1,8 @@
+/**
+ * TMCStepper library by @teemuatlut
+ * DRV_STATUS.cpp - Driver Status
+ * TMC2130 (TMC2160, TMC5130, TMC5160, TMC5161), TMC2208 (TMC2209, TMC2224)
+ */
 #include "TMCStepper.h"
 #include "TMC_MACROS.h"
 
@@ -16,6 +21,10 @@ bool TMC2130Stepper::s2gb()			{ GET_REG(TMC2130_n, s2gb); 		}
 bool TMC2130Stepper::ola()			{ GET_REG(TMC2130_n, ola); 			}
 bool TMC2130Stepper::olb()			{ GET_REG(TMC2130_n, olb); 			}
 bool TMC2130Stepper::stst()			{ GET_REG(TMC2130_n, stst); 		}
+
+//
+// TMC2208 (TMC2209, TMC2224)
+//
 
 uint32_t TMC2208Stepper::DRV_STATUS() {
 	return read(TMC2208_n::DRV_STATUS_t::address);
