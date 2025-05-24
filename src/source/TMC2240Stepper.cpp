@@ -31,9 +31,14 @@ TMC2240Stepper::TMC2240Stepper(uint16_t pinCS, uint16_t pinMOSI, uint16_t pinMIS
 	}
 
 void TMC2240Stepper::defaults() {
-	//GCONF_register.sr = 0x0000;
-	//CHOPCONF_register.sr = 0x10000053;
-	//PWMCONF_register.sr = 0xC10D0024;
+	//GCONF_register.en_spreadcycle = 0;
+	GCONF_register.multistep_filt = 1;
+
+	IHOLD_IRUN_register.iholddelay = 1;
+	TPOWERDOWN_register.sr = 20;
+
+	CHOPCONF_register.sr = 0x10000053; 	// 1/16 x 256 single-edge
+	PWMCONF_register.sr = 0xC10D0024; 	// autoscale=1, freq=01, grad & amp, freewheel=00
 }
 
 __attribute__((weak))
@@ -152,7 +157,6 @@ void TMC2240Stepper::begin() {
 
 	//GCONF(GCONF_register.sr);
 	//CHOPCONF(CHOPCONF_register.sr);
-	//COOLCONF(COOLCONF_register.sr);
 	//PWMCONF(PWMCONF_register.sr);
 	//IHOLD_IRUN(IHOLD_IRUN_register.sr);
 
@@ -161,7 +165,10 @@ void TMC2240Stepper::begin() {
 }
 
 void TMC2240Stepper::push() {
+	TPOWERDOWN(TPOWERDOWN_register.sr);
+	TPWMTHRS(TPWMTHRS_register.sr);
 	GCONF(GCONF_register.sr);
+	SLAVECONF(SLAVECONF_register.sr);
 	DRV_CONF(DRV_CONF_register.sr);
 	IHOLD_IRUN(IHOLD_IRUN_register.sr);
 	CHOPCONF(CHOPCONF_register.sr);
@@ -325,6 +332,13 @@ uint8_t TMC2240Stepper::TPOWERDOWN() { return TPOWERDOWN_register.sr; }
 void TMC2240Stepper::TPOWERDOWN(uint8_t input) {
 	TPOWERDOWN_register.sr = input;
 	write(TPOWERDOWN_register.address, TPOWERDOWN_register.sr);
+}
+
+// W: TPWMTHRS
+uint32_t TMC2240Stepper::TPWMTHRS() { return TPWMTHRS_register.sr; }
+void TMC2240Stepper::TPWMTHRS(uint32_t input) {
+  TPWMTHRS_register.sr = input;
+  write(TPWMTHRS_register.address, TPWMTHRS_register.sr);
 }
 
 void TMC2240Stepper::hysteresis_end(int8_t value) { hend(value+3); }

@@ -1362,6 +1362,10 @@ class TMC2240Stepper {
 		uint8_t TPOWERDOWN();
 		void TPOWERDOWN(uint8_t input);
 
+		// RW: TPWMTHRS
+		uint32_t TPWMTHRS();
+		void TPWMTHRS(						uint32_t input);
+
 		uint8_t status_response;
 	protected:
 		INIT2240_REGISTER(GCONF)			{{.sr=0}};
@@ -1374,6 +1378,7 @@ class TMC2240Stepper {
 		INIT2240_REGISTER(GLOBAL_SCALER)	{{.sr=0}};		// 8b
 		INIT_REGISTER(COOLCONF){{.sr=0}};	// 32b
 		INIT_REGISTER(TCOOLTHRS){.sr=0};	// 32b
+		INIT_REGISTER(TPWMTHRS){.sr=0};			// 32b
 		INIT_REGISTER(THIGH){.sr=0};			// 32b
 
 		struct IFCNT_t 		{ constexpr static uint8_t address = 0x02; };
