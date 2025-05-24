@@ -174,47 +174,6 @@ uint8_t TMC2240Stepper::IFCNT() {
 	return read(IFCNT_t::address);
 }
 
-void TMC2240Stepper::SLAVECONF(uint16_t input) {
-	SLAVECONF_register.sr = input&0xF00;
-	write(SLAVECONF_register.address, SLAVECONF_register.sr);
-}
-
-uint16_t TMC2240Stepper::SLAVECONF() {
-	return SLAVECONF_register.sr;
-}
-
-void TMC2240Stepper::senddelay(uint8_t B) 	{ SLAVECONF_register.SENDDELAY = B; write(SLAVECONF_register.address, SLAVECONF_register.sr); }
-uint8_t TMC2240Stepper::senddelay() 		{ return SLAVECONF_register.SENDDELAY; }
-
-uint32_t TMC2240Stepper::IOIN() {
-	return read(TMC2240_n::IOIN_t::address);
-}
-
-// W: GLOBAL_SCALER
-uint8_t TMC2240Stepper::GLOBAL_SCALER() { return GLOBAL_SCALER_register.sr; }
-void TMC2240Stepper::GLOBAL_SCALER(uint8_t input) {
-  GLOBAL_SCALER_register.sr = input;
-  write(GLOBAL_SCALER_register.address, GLOBAL_SCALER_register.sr);
-}
-
-bool TMC2240Stepper::step()			    { TMC2240_n::IOIN_t r{0}; r.sr = IOIN(); return r.step;		}
-bool TMC2240Stepper::dir()			    { TMC2240_n::IOIN_t r{0}; r.sr = IOIN(); return r.dir;		}
-bool TMC2240Stepper::encb()			    { TMC2240_n::IOIN_t r{0}; r.sr = IOIN(); return r.encb;		}
-bool TMC2240Stepper::enca()			    { TMC2240_n::IOIN_t r{0}; r.sr = IOIN(); return r.enca;		}
-bool TMC2240Stepper::drv_enn()		    { TMC2240_n::IOIN_t r{0}; r.sr = IOIN(); return r.drv_enn;	}
-bool TMC2240Stepper::encn()			    { TMC2240_n::IOIN_t r{0}; r.sr = IOIN(); return r.encn;		}
-bool TMC2240Stepper::uart_en()		    { TMC2240_n::IOIN_t r{0}; r.sr = IOIN(); return r.uart_en;	}
-bool TMC2240Stepper::comp_a()		    { TMC2240_n::IOIN_t r{0}; r.sr = IOIN(); return r.comp_a;	}
-bool TMC2240Stepper::comp_b()		    { TMC2240_n::IOIN_t r{0}; r.sr = IOIN(); return r.comp_b;	}
-bool TMC2240Stepper::comp_a1_a2()	    { TMC2240_n::IOIN_t r{0}; r.sr = IOIN(); return r.comp_a1_a2;	}
-bool TMC2240Stepper::comp_b1_b2()	    { TMC2240_n::IOIN_t r{0}; r.sr = IOIN(); return r.comp_b1_b2;	}
-bool TMC2240Stepper::output()		    { TMC2240_n::IOIN_t r{0}; r.sr = IOIN(); return r.output;	}
-bool TMC2240Stepper::ext_res_det()	    { TMC2240_n::IOIN_t r{0}; r.sr = IOIN(); return r.ext_res_det;	}
-bool TMC2240Stepper::ext_clk()	        { TMC2240_n::IOIN_t r{0}; r.sr = IOIN(); return r.ext_clk;	}
-bool TMC2240Stepper::adc_err()		    { TMC2240_n::IOIN_t r{0}; r.sr = IOIN(); return r.adc_err;	}
-uint8_t TMC2240Stepper::silicon_rv() 	{ TMC2240_n::IOIN_t r{0}; r.sr = IOIN(); return r.silicon_rv;	}
-uint8_t TMC2240Stepper::version() 	    { TMC2240_n::IOIN_t r{0}; r.sr = IOIN(); return r.version;	}
-
 uint32_t TMC2240Stepper::PWM_SCALE() {
 	return read(TMC2240_n::PWM_SCALE_t::address);
 }

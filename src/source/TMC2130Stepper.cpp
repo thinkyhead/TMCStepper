@@ -206,16 +206,6 @@ void TMC2130Stepper::push() {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
-// R: IOIN
-uint32_t  TMC2130Stepper::IOIN()    { return read(IOIN_t::address); }
-bool TMC2130Stepper::step()         { IOIN_t r{0}; r.sr = IOIN(); return r.step; }
-bool TMC2130Stepper::dir()          { IOIN_t r{0}; r.sr = IOIN(); return r.dir; }
-bool TMC2130Stepper::dcen_cfg4()    { IOIN_t r{0}; r.sr = IOIN(); return r.dcen_cfg4; }
-bool TMC2130Stepper::dcin_cfg5()    { IOIN_t r{0}; r.sr = IOIN(); return r.dcin_cfg5; }
-bool TMC2130Stepper::drv_enn_cfg6() { IOIN_t r{0}; r.sr = IOIN(); return r.drv_enn_cfg6; }
-bool TMC2130Stepper::dco()          { IOIN_t r{0}; r.sr = IOIN(); return r.dco; }
-uint8_t TMC2130Stepper::version()   { IOIN_t r{0}; r.sr = IOIN(); return r.version; }
-///////////////////////////////////////////////////////////////////////////////////////
 // W: TCOOLTHRS
 uint32_t TMC2130Stepper::TCOOLTHRS() { return TCOOLTHRS_register.sr; }
 void TMC2130Stepper::TCOOLTHRS(uint32_t input) {
