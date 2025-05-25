@@ -37,8 +37,8 @@ void TMC2240Stepper::defaults() {
 	IHOLD_IRUN_register.iholddelay = 1;
 	TPOWERDOWN_register.sr = 20;
 
-	CHOPCONF_register.sr = 0x10000053; 	// 1/16 x 256 single-edge
-	PWMCONF_register.sr = 0xC10D0024; 	// autoscale=1, freq=01, grad & amp, freewheel=00
+	CHOPCONF_register.sr = 0x000100C3; 	// SpreadCycle, 1/16 * 256, vsense=0, toff=3, tbl=2
+	PWMCONF_register.sr = 0x00050480; 	// StealthChop2, autoscale, grad=4, ampl=128, ofs=64
 }
 
 __attribute__((weak))
@@ -242,7 +242,6 @@ uint16_t TMC2240Stepper::cs2rms(uint8_t CS) {
 	return (float)(CS+0.5)*(globalscaler * IFS_current_RMS)/256/32*1000;
 }
 
-
 float TMC2240Stepper::calc_IFS_current_RMS() {
 	uint32_t Kifs_values[] = {11750,24000,36000,36000};
 	uint32_t Kifs = Kifs_values[DRV_CONF_register.current_range];
@@ -317,7 +316,6 @@ bool  TMC2240Stepper::uv_cp()			{ TMC2240_n::GSTAT_t r; r.sr = GSTAT(); return r
 bool  TMC2240Stepper::register_reset()	{ TMC2240_n::GSTAT_t r; r.sr = GSTAT(); return r.register_reset; }
 bool  TMC2240Stepper::vm_uvlo()			{ TMC2240_n::GSTAT_t r; r.sr = GSTAT(); return r.vm_uvlo; }
 
-
 uint8_t TMC2240Stepper::test_connection() {
   	uint32_t drv_status = DRV_STATUS();
   	switch (drv_status) {
@@ -340,6 +338,8 @@ void TMC2240Stepper::TPWMTHRS(uint32_t input) {
   TPWMTHRS_register.sr = input;
   write(TPWMTHRS_register.address, TPWMTHRS_register.sr);
 }
+
+uint32_t TMC2240Stepper::TSTEP() { return read(TSTEP_t::address); }
 
 void TMC2240Stepper::hysteresis_end(int8_t value) { hend(value+3); }
 int8_t TMC2240Stepper::hysteresis_end() { return hend() - 3; };

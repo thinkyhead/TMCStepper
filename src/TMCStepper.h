@@ -1366,6 +1366,9 @@ class TMC2240Stepper {
 		uint32_t TPWMTHRS();
 		void TPWMTHRS(						uint32_t input);
 
+		// R: TSTEP
+		uint32_t TSTEP();
+
 		uint8_t status_response;
 	protected:
 		INIT2240_REGISTER(GCONF)			{{.sr=0}};

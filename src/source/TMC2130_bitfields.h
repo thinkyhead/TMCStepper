@@ -99,7 +99,7 @@ struct IOIN_t {
 
 struct TPOWERDOWN_t {
   constexpr static uint8_t address = 0x11;
-  uint8_t sr : 8;
+  uint8_t sr;
 };
 
 struct TPWMTHRS_t {
@@ -137,7 +137,7 @@ struct VDCMIN_t {
 struct CHOPCONF_t {
   constexpr static uint8_t address = 0x6C;
   union {
-    uint32_t sr : 32;
+    uint32_t sr;
     struct {
       uint8_t toff : 4,
               hstrt : 3,

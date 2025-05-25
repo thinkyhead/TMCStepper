@@ -49,8 +49,8 @@ namespace TMC5130_n {
               enc_n_dco : 1,
               sd_mode : 1,
               swcomp_in : 1;
-        uint16_t : 16;
-        uint8_t version : 8;
+        uint16_t ;
+        uint8_t version;
       };
     };
   };
@@ -83,7 +83,7 @@ struct VSTART_t {
 
 struct A1_t {
   constexpr static uint8_t address = 0x24;
-  uint16_t sr : 16;
+  uint16_t sr;
 };
 
 struct V1_t {
@@ -93,7 +93,7 @@ struct V1_t {
 
 struct AMAX_t {
   constexpr static uint8_t address = 0x26;
-  uint16_t sr : 16;
+  uint16_t sr;
 };
 
 struct VMAX_t {
@@ -103,12 +103,12 @@ struct VMAX_t {
 
 struct DMAX_t {
   constexpr static uint8_t address = 0x28;
-  uint16_t sr : 16;
+  uint16_t sr;
 };
 
 struct D1_t {
   constexpr static uint8_t address = 0x2A;
-  uint16_t sr : 16;
+  uint16_t sr;
 };
 
 struct VSTOP_t {
@@ -118,7 +118,7 @@ struct VSTOP_t {
 
 struct TZEROWAIT_t {
   constexpr static uint8_t address = 0x2C;
-  uint16_t sr : 16;
+  uint16_t sr;
 };
 
 struct SW_MODE_t {
