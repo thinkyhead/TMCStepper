@@ -3,7 +3,7 @@
  * ENCMODE.cpp - Driver Status
  * TMC5130 (TMC5160, TMC5161)
  */
-#include "TMCStepper.h"
+#include "../TMCStepper.h"
 #include "TMC_MACROS.h"
 
 #define SET_REG(SETTING) ENCMODE_register.SETTING = B; write(ENCMODE_register.address, ENCMODE_register.sr);

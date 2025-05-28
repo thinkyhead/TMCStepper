@@ -3,7 +3,7 @@
  * CHOPCONF.cpp - CHOPCONF Chopper Configuration
  * TMC2130 (TMC2160, TMC5130, TMC5160, TMC5161), TMC5160, TMC2208 (TMC2209, TMC2224), TMC2660
  */
-#include "TMCStepper.h"
+#include "../TMCStepper.h"
 #include "TMC_MACROS.h"
 
 #define SET_REG(SETTING) CHOPCONF_register.SETTING = B; write(CHOPCONF_register.address, CHOPCONF_register.sr)
@@ -12,9 +12,7 @@
 // TMC2130 (TMC2160, TMC5130, TMC5160, TMC5161)
 //
 
-uint32_t TMC2130Stepper::CHOPCONF() {
-	return read(CHOPCONF_register.address);
-}
+uint32_t TMC2130Stepper::CHOPCONF() { return read(CHOPCONF_register.address); }
 void TMC2130Stepper::CHOPCONF(uint32_t input) {
 	CHOPCONF_register.sr = input;
 	write(CHOPCONF_register.address, CHOPCONF_register.sr);
@@ -67,12 +65,10 @@ uint8_t TMC5160Stepper::tpfd()		{ CHOPCONF_t r{0}; r.sr = CHOPCONF(); return r.t
 // TMC2208 (TMC2209, TMC2224)
 //
 
+uint32_t TMC2208Stepper::CHOPCONF() { return read(CHOPCONF_register.address); }
 void TMC2208Stepper::CHOPCONF(uint32_t input) {
 	CHOPCONF_register.sr = input;
 	write(CHOPCONF_register.address, CHOPCONF_register.sr);
-}
-uint32_t TMC2208Stepper::CHOPCONF() {
-	return read(CHOPCONF_register.address);
 }
 void TMC2208Stepper::toff	( uint8_t  B )	{ SET_REG(toff);	}
 void TMC2208Stepper::hstrt	( uint8_t  B )	{ SET_REG(hstrt);	}
@@ -96,12 +92,10 @@ bool	TMC2208Stepper::dedge()		{ TMC2208_n::CHOPCONF_t r{0}; r.sr = CHOPCONF(); r
 bool	TMC2208Stepper::diss2g()	{ TMC2208_n::CHOPCONF_t r{0}; r.sr = CHOPCONF(); return r.diss2g;	}
 bool	TMC2208Stepper::diss2vs()	{ TMC2208_n::CHOPCONF_t r{0}; r.sr = CHOPCONF(); return r.diss2vs;	}
 
+uint32_t TMC2240Stepper::CHOPCONF() { return read(CHOPCONF_register.address); }
 void TMC2240Stepper::CHOPCONF(uint32_t input) {
 	CHOPCONF_register.sr = input;
 	write(CHOPCONF_register.address, CHOPCONF_register.sr);
-}
-uint32_t TMC2240Stepper::CHOPCONF() {
-	return read(CHOPCONF_register.address);
 }
 void TMC2240Stepper::toff(uint8_t B)	{ SET_REG(toff);	}
 void TMC2240Stepper::hstrt(uint8_t B)	{ SET_REG(hstrt);	}
@@ -138,7 +132,6 @@ bool	TMC2240Stepper::diss2vs()	{ TMC2240_n::CHOPCONF_t r{0}; r.sr = CHOPCONF(); 
 //
 // TMC2660
 //
-
 #define GET_REG_2660(SETTING) return CHOPCONF_register.SETTING;
 
 uint32_t TMC2660Stepper::CHOPCONF() { return CHOPCONF_register.sr; }
@@ -147,7 +140,7 @@ void TMC2660Stepper::CHOPCONF(uint32_t data) {
   write(CHOPCONF_register.address, CHOPCONF_register.sr);
 }
 
-void TMC2660Stepper::toff(uint8_t B) 	{
+void TMC2660Stepper::toff(uint8_t B) {
 	SET_REG(toff);
 	if (B>0) _savedToff = B;
 }

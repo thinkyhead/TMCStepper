@@ -3,7 +3,7 @@
  * ENCMODE.cpp - Driver Status
  * TMC2130 (TMC2160, TMC5130, TMC5160, TMC5161), TMC5160 (TMC5161), TMC2208 (TMC2209, TMC2224)
  */
-#include "TMCStepper.h"
+#include "../TMCStepper.h"
 #include "TMC_MACROS.h"
 
 #define SET_REG(SETTING) GCONF_register.SETTING = B; write(GCONF_register.address, GCONF_register.sr)

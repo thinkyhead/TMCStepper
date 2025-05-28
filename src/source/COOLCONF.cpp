@@ -3,7 +3,7 @@
  * COOLCONF.cpp - COOLCONF CoolStep Configuration
  * TMC2130 (TMC2160, TMC5130, TMC5160, TMC5161), TMC2209
  */
-#include "TMCStepper.h"
+#include "../TMCStepper.h"
 #include "TMC_MACROS.h"
 
 #define SET_REG(SETTING) COOLCONF_register.SETTING = B; write(COOLCONF_register.address, COOLCONF_register.sr);

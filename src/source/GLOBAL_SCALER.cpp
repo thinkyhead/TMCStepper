@@ -3,7 +3,7 @@
  * GLOBAL_SCALER.cpp
  * TMC2160, TMC2240
  */
-#include "TMCStepper.h"
+#include "../TMCStepper.h"
 #include "TMC_MACROS.h"
 
 //

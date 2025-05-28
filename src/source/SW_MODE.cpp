@@ -3,7 +3,7 @@
  * SW_MODE.cpp - Software Mode
  * TMC5130 (TMC5160, TMC5161)
  */
-#include "TMCStepper.h"
+#include "../TMCStepper.h"
 #include "TMC_MACROS.h"
 
 #define SET_REG(SETTING) SW_MODE_register.SETTING = B; write(SW_MODE_register.address, SW_MODE_register.sr)

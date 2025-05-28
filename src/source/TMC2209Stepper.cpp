@@ -3,7 +3,7 @@
  * TMC2209Stepper.cpp
  * Implementing methods for TMC2209 (TMC2224)
  */
-#include "TMCStepper.h"
+#include "../TMCStepper.h"
 
 void TMC2209Stepper::push() {
 	IHOLD_IRUN(IHOLD_IRUN_register.sr);

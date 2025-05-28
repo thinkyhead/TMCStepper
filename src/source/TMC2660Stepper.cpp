@@ -2,7 +2,7 @@
  * TMCStepper library by @teemuatlut
  * TMC2660Stepper.cpp
  */
-#include "TMCStepper.h"
+#include "../TMCStepper.h"
 #include "SW_SPI.h"
 
 TMC2660Stepper::TMC2660Stepper(uint16_t pinCS, float RS) :

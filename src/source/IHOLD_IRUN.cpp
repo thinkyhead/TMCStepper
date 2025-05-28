@@ -3,7 +3,7 @@
  * IHOLD_IRUN.cpp - Hold / Run
  * TMCStepper - TMC2130 (TMC2160, TMC5130, TMC5160, TMC5161), TMC2208 (TMC2209, TMC2224), TMC2240
  */
-#include "TMCStepper.h"
+#include "../TMCStepper.h"
 #include "TMC_MACROS.h"
 
 #define SET_REG(SETTING) IHOLD_IRUN_register.SETTING = B; write(IHOLD_IRUN_register.address, IHOLD_IRUN_register.sr);

@@ -3,7 +3,7 @@
  * DRV_STATUS.cpp - Driver Status
  * TMC2130 (TMC2160, TMC5130, TMC5160, TMC5161), TMC2208 (TMC2209, TMC2224)
  */
-#include "TMCStepper.h"
+#include "../TMCStepper.h"
 #include "TMC_MACROS.h"
 
 #define GET_REG(NS, SETTING) NS::DRV_STATUS_t r{0}; r.sr = DRV_STATUS(); return r.SETTING
@@ -70,4 +70,3 @@ bool 		TMC2240Stepper::ola() 		{ GET_REG(TMC2240_n, ola); 			}
 bool 		TMC2240Stepper::olb() 		{ GET_REG(TMC2240_n, olb); 			}
 uint32_t 	TMC2240Stepper::SG_RESULT()	{ GET_REG(TMC2240_n, SG_RESULT);	}
 bool 		TMC2240Stepper::stst() 		{ GET_REG(TMC2240_n, stst);			}
-

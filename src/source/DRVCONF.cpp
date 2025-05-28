@@ -3,7 +3,7 @@
  * DRVCONF.cpp - Driver Configuration
  * TMC2660
  */
-#include "TMCStepper.h"
+#include "../TMCStepper.h"
 #include "TMC_MACROS.h"
 
 #define SET_REG(SETTING) DRVCONF_register.SETTING = B; write(DRVCONF_register.address, DRVCONF_register.sr)

@@ -3,7 +3,7 @@
  * IOIN.cpp - Driver Control
  * TMC2130 (TMC5160, TMC5161), TMC2160, TMC5130, TMC2208, TMC2209, TMC2224, TMC2240
  */
-#include "TMCStepper.h"
+#include "../TMCStepper.h"
 #include "TMC_MACROS.h"
 
 #define GET_REG_NS(NS, SETTING) NS::IOIN_t r{0}; r.sr = IOIN(); return r.SETTING

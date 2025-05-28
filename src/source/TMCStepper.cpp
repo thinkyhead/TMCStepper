@@ -18,7 +18,7 @@
  * MSCNT, MSCURACT
  * cur_a, cur_b
  */
-#include "TMCStepper.h"
+#include "../TMCStepper.h"
 #include "TMC_MACROS.h"
 
 /*

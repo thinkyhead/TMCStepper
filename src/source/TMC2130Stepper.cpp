@@ -3,7 +3,7 @@
  * TMC2130Stepper.cpp
  * Implementing methods for TMC2130 (TMC2160, TMC5130, TMC5160, TMC5161)
  */
-#include "TMCStepper.h"
+#include "../TMCStepper.h"
 #include "TMC_MACROS.h"
 
 int8_t TMC2130Stepper::chain_length = 0;
@@ -167,12 +167,13 @@ void TMC2130Stepper::write(uint8_t addressByte, uint32_t config) {
 }
 
 void TMC2130Stepper::begin() {
-  //set pins
+  // Init pins
   pinMode(_pinCS, OUTPUT);
   switchCSpin(HIGH);
 
   if (TMC_SW_SPI != nullptr) TMC_SW_SPI->init();
 
+  // Send current states of shadow registers (0) to hardware
   GCONF(GCONF_register.sr);
   CHOPCONF(CHOPCONF_register.sr);
   COOLCONF(COOLCONF_register.sr);
@@ -190,6 +191,7 @@ void TMC2130Stepper::begin() {
 bool TMC2130Stepper::isEnabled() { return !drv_enn_cfg6() && toff(); }
 
 void TMC2130Stepper::push() {
+  // Apply current states of shadow registers
   GCONF(GCONF_register.sr);
   IHOLD_IRUN(IHOLD_IRUN_register.sr);
   TPOWERDOWN(TPOWERDOWN_register.sr);
@@ -241,35 +243,28 @@ void TMC2130Stepper::VDCMIN(uint32_t input) {
 }
 ///////////////////////////////////////////////////////////////////////////////////////
 // RW: DCCTRL
+uint32_t TMC2130Stepper::DCCTRL() { return read(DCCTRL_register.address); }
 void TMC2130Stepper::DCCTRL(uint32_t input) {
 	DCCTRL_register.sr = input;
 	write(DCCTRL_register.address, DCCTRL_register.sr);
 }
+
+uint16_t TMC2130Stepper::dc_time() { DCCTRL_t r{0}; r.sr = DCCTRL(); return r.dc_time; }
 void TMC2130Stepper::dc_time(uint16_t input) {
 	DCCTRL_register.dc_time = input;
 	write(DCCTRL_register.address, DCCTRL_register.sr);
 }
+
+uint8_t TMC2130Stepper::dc_sg() { DCCTRL_t r{0}; r.sr = DCCTRL(); return r.dc_sg; }
 void TMC2130Stepper::dc_sg(uint8_t input) {
 	DCCTRL_register.dc_sg = input;
 	write(DCCTRL_register.address, DCCTRL_register.sr);
 }
 
-uint32_t TMC2130Stepper::DCCTRL() {
-	return read(DCCTRL_register.address);
-}
-uint16_t TMC2130Stepper::dc_time() {
-	DCCTRL_t r{0};
-  r.sr = DCCTRL();
-	return r.dc_time;
-}
-uint8_t TMC2130Stepper::dc_sg() {
-	DCCTRL_t r{0};
-  r.sr = DCCTRL();
-	return r.dc_sg;
-}
 ///////////////////////////////////////////////////////////////////////////////////////
 // R: PWM_SCALE
 uint8_t TMC2130Stepper::PWM_SCALE() { return read(PWM_SCALE_t::address); }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // W: ENCM_CTRL
 uint8_t TMC2130Stepper::ENCM_CTRL() { return ENCM_CTRL_register.sr; }

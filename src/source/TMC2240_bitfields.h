@@ -107,7 +107,7 @@ namespace TMC2240_n {
       uint32_t sr;
       struct {
         uint8_t current_range : 2,
-                              : 2, // unused
+                              : 2, 	// unused
                 slope_control : 2;
         uint16_t              : 16; // unused
       };

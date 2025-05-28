@@ -3,7 +3,7 @@
  * TMC2208Stepper.cpp
  * Implementing methods for TMC2208 (TMC2209, TMC2224)
  */
-#include "TMCStepper.h"
+#include "../TMCStepper.h"
 #include "TMC_MACROS.h"
 #include "SERIAL_SWITCH.h"
 

@@ -2,7 +2,7 @@
  * TMCStepper library by @teemuatlut
  * TMC2240Stepper.cpp
  */
-#include "TMCStepper.h"
+#include "../TMCStepper.h"
 #include "TMC_MACROS.h"
 
 int8_t TMC2240Stepper::chain_length = 0;
