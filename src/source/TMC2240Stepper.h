@@ -260,21 +260,44 @@ class TMC2240Stepper {
 		// R: TSTEP
 		uint32_t TSTEP();
 
+		// RW: SG4_THRS
+		uint32_t SG4_THRS();
+		void SG4_THRS(uint32_t input);
+		uint8_t sg4_thrs();
+		void sg4_thrs(uint8_t B);
+		bool sg4_filt_en();
+		void sg4_filt_en(bool B);
+		uint8_t sg4_angle_offset();
+		void sg4_angle_offset(uint8_t B);
+
+		// R: SG4_RESULT
+		uint32_t SG4_RESULT();
+		uint16_t sg4_result();
+
 		uint8_t status_response;
+
 	protected:
-		INIT2240_REGISTER(GCONF)			{{.sr=0}};
-		INIT2240_REGISTER(DRV_CONF)			{{.sr=0}};
-		INIT2240_REGISTER(SLAVECONF)		{{.sr=0}};
-		INIT2240_REGISTER(IHOLD_IRUN)		{{.sr=0}};	// 32b
-		INIT2240_REGISTER(CHOPCONF)			{{.sr=0}};
-		INIT2240_REGISTER(PWMCONF)			{{.sr=0}};
-		INIT2240_REGISTER(TPOWERDOWN)		{{.sr=0}};	// 8b
-		INIT2240_REGISTER(GLOBAL_SCALER)	{{.sr=0}};	// 8b
-		INIT2240_REGISTER(SG4_RESULT)       {{.sr=0}};	// 32b
-		INIT2240_REGISTER(COOLCONF){{.sr=0}};	// 32b
-		INIT2240_REGISTER(TCOOLTHRS){.sr=0};	// 32b
-		INIT2240_REGISTER(TPWMTHRS){.sr=0};		// 32b
-		INIT2240_REGISTER(THIGH){.sr=0};		// 32b
+		INIT2240_REGISTER(GCONF);			// 16b
+		INIT2240_REGISTER(GSTAT);			// 8b
+		INIT2240_REGISTER(TPOWERDOWN);		// 8b
+		INIT2240_REGISTER(SLAVECONF);		// 16b
+		INIT2240_REGISTER(IOIN);			// 32b
+		INIT2240_REGISTER(DRV_CONF);		// 32b
+		INIT2240_REGISTER(DRV_STATUS);		// 32b
+		INIT2240_REGISTER(GLOBAL_SCALER);	// 8b
+		INIT2240_REGISTER(IHOLD_IRUN);		// 32b
+		INIT2240_REGISTER(TSTEP);			// 32b
+		INIT2240_REGISTER(TPWMTHRS);		// 32b
+		INIT2240_REGISTER(TCOOLTHRS);		// 32b
+		INIT2240_REGISTER(THIGH);			// 32b
+		INIT2240_REGISTER(CHOPCONF);		// 32b
+		INIT2240_REGISTER(COOLCONF);		// 32b
+		INIT2240_REGISTER(PWMCONF);			// 32b
+		INIT2240_REGISTER(PWM_SCALE);		// 32b
+		INIT2240_REGISTER(PWM_AUTO);		// 32b
+		INIT2240_REGISTER(SG4_THRS);		// 32b
+		INIT2240_REGISTER(SG4_RESULT);		// 32b
+		//INIT2240_REGISTER(SG4_IND);
 
 		struct IFCNT_t 		{ constexpr static uint8_t address = 0x02; };
 		struct TSTEP_t 		{ constexpr static uint8_t address = 0x12; };
@@ -290,8 +313,7 @@ class TMC2240Stepper {
 		void write(uint8_t addressByte, uint32_t config);
 		uint32_t read(uint8_t addressByte);
 
-		static constexpr uint8_t TMC_READ = 0x00,
-									TMC_WRITE = 0x80;
+		static constexpr uint8_t TMC_READ = 0x00, TMC_WRITE = 0x80;
 
 		SSwitch *sswitch = nullptr;
 

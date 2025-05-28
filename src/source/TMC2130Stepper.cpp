@@ -130,12 +130,9 @@ uint32_t TMC2130Stepper::read(uint8_t addressByte) {
   // ...and once more to MCU
   status_response = transfer(addressByte); // Send the address byte again
   out  = transfer(0x00);
-  out <<= 8;
-  out |= transfer(0x00);
-  out <<= 8;
-  out |= transfer(0x00);
-  out <<= 8;
-  out |= transfer(0x00);
+  out <<= 8; out |= transfer(0x00);
+  out <<= 8; out |= transfer(0x00);
+  out <<= 8; out |= transfer(0x00);
 
   endTransaction();
   switchCSpin(HIGH);

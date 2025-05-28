@@ -112,12 +112,9 @@ uint32_t TMC2240Stepper::read(uint8_t addressByte) {
 	// ...and once more to MCU
 	status_response = transfer(addressByte); // Send the address byte again
 	out  = transfer(0x00);
-	out <<= 8;
-	out |= transfer(0x00);
-	out <<= 8;
-	out |= transfer(0x00);
-	out <<= 8;
-	out |= transfer(0x00);
+	out <<= 8; out |= transfer(0x00);
+	out <<= 8; out |= transfer(0x00);
+	out <<= 8; out |= transfer(0x00);
 
 	endTransaction();
 	switchCSpin(HIGH);
@@ -155,10 +152,10 @@ void TMC2240Stepper::begin() {
 
 	if (TMC_SW_SPI != nullptr) TMC_SW_SPI->init();
 
-	//GCONF(GCONF_register.sr);
-	//CHOPCONF(CHOPCONF_register.sr);
-	//PWMCONF(PWMCONF_register.sr);
-	//IHOLD_IRUN(IHOLD_IRUN_register.sr);
+	GCONF(GCONF_register.sr);
+	CHOPCONF(CHOPCONF_register.sr);
+	PWMCONF(PWMCONF_register.sr);
+	IHOLD_IRUN(IHOLD_IRUN_register.sr);
 
 	//toff(8); //off_time(8);
 	//tbl(1); //blank_time(24);
@@ -173,6 +170,26 @@ void TMC2240Stepper::push() {
 	IHOLD_IRUN(IHOLD_IRUN_register.sr);
 	CHOPCONF(CHOPCONF_register.sr);
 	PWMCONF(PWMCONF_register.sr);
+
+	//GSTAT(GSTAT_register.sr);
+	//TPOWERDOWN(TPOWERDOWN_register.sr);
+
+	//IOIN(IOIN_register.sr);
+
+	//DRV_STATUS(DRV_STATUS_register.sr);
+	//GLOBAL_SCALER(GLOBAL_SCALER_register.sr);
+
+	//TSTEP(TSTEP_register.sr);
+
+	//TCOOLTHRS(TCOOLTHRS_register.sr);
+	//THIGH(THIGH_register.sr);
+
+	//COOLCONF(COOLCONF_register.sr);
+
+	//PWM_SCALE(PWM_SCALE_register.sr);
+	//PWM_AUTO(PWM_AUTO_register.sr);
+	SG4_THRS(SG4_THRS_register.sr);
+	//SG4_RESULT(SG4_RESULT_register.sr);
 }
 
 bool TMC2240Stepper::isEnabled() { return !drv_enn() && toff(); }
@@ -353,10 +370,36 @@ void TMC2240Stepper::TCOOLTHRS(uint32_t input) {
 	TCOOLTHRS_register.sr = input;
 	write(TCOOLTHRS_register.address, TCOOLTHRS_register.sr);
 }
-///////////////////////////////////////////////////////////////////////////////////////
+
 // W: THIGH
 uint32_t TMC2240Stepper::THIGH() { return THIGH_register.sr; }
 void TMC2240Stepper::THIGH(uint32_t input) {
 	THIGH_register.sr = input;
 	write(THIGH_register.address, THIGH_register.sr);
 }
+
+// RW: SG4_THRS
+uint32_t TMC2240Stepper::SG4_THRS() { return SG4_THRS_register.sr; }
+void TMC2240Stepper::SG4_THRS(uint32_t input) {
+	SG4_THRS_register.sr = input;
+	write(SG4_THRS_register.address, SG4_THRS_register.sr);
+}
+uint8_t TMC2240Stepper::sg4_thrs() { return SG4_THRS_register.sg4_thrs; }
+void TMC2240Stepper::sg4_thrs(uint8_t B) {
+	SG4_THRS_register.sg4_thrs = B;
+	write(SG4_THRS_register.address, SG4_THRS_register.sr);
+}
+bool TMC2240Stepper::sg4_filt_en() { return SG4_THRS_register.sg4_filt_en; }
+void TMC2240Stepper::sg4_filt_en(bool B) {
+	SG4_THRS_register.sg4_filt_en = B;
+	write(SG4_THRS_register.address, SG4_THRS_register.sr);
+}
+uint8_t TMC2240Stepper::sg4_angle_offset() { return SG4_THRS_register.sg4_angle_offset; }
+void TMC2240Stepper::sg4_angle_offset(uint8_t B) {
+	SG4_THRS_register.sg4_angle_offset = B;
+	write(SG4_THRS_register.address, SG4_THRS_register.sr);
+}
+
+// R:SG4_RESULT
+uint32_t TMC2240Stepper::SG4_RESULT()	{ return read(SG4_RESULT_register.address); }
+uint16_t TMC2240Stepper::sg4_result()	{ TMC2240_n::SG4_RESULT_t r; r.sr = SG4_RESULT(); return r.sg4_result; }
