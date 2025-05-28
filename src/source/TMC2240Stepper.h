@@ -6,8 +6,6 @@
  */
 #pragma once
 
-#include "TMC2240_bitfields.h"
-
 #define INIT2240_REGISTER(REG) TMC2240_n::REG##_t REG##_register = TMC2240_n::REG##_t
 
 class TMC2240Stepper {

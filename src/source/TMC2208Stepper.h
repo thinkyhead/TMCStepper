@@ -6,7 +6,6 @@
  */
 #pragma once
 
-#include "TMC2208_bitfields.h"
 #define INIT2208_REGISTER(REG) TMC2208_n::REG##_t REG##_register = TMC2208_n::REG##_t
 
 class TMC2208Stepper : public TMCStepper {

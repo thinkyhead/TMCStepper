@@ -6,7 +6,6 @@
  */
 #pragma once
 
-#include "TMC2660_bitfields.h"
 #define INIT2660_REGISTER(REG) TMC2660_n::REG##_t REG##_register = TMC2660_n::REG##_t
 
 class TMC2660Stepper {

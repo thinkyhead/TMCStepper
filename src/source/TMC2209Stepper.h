@@ -6,8 +6,6 @@
  */
 #pragma once
 
-#include "TMC2209_bitfields.h"
-
 class TMC2209Stepper : public TMC2208Stepper {
 	public:
 		TMC2209Stepper(Stream * SerialPort, float RS, uint8_t addr) :

@@ -1,6 +1,6 @@
 /**
  * TMCStepper library by @teemuatlut
- * TMC5130_bitfields.h
+ * TMC5160_bitfields.h
  *
  * Inherits from TMC5130 < TMC2160 < TMC2130.
  *
