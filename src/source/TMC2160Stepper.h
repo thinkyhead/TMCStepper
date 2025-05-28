@@ -6,7 +6,7 @@
  */
 #pragma once
 
-#define INIT2160_REGISTER(REG) TMC2160_n::REG##_t REG##_register = TMC2160_n::REG##_t
+#define INIT2160_REGISTER(REG) TMC2160_n::REG##_t REG##_register{0}
 
 class TMC2160Stepper : public TMC2130Stepper {
 	public:
@@ -99,10 +99,10 @@ class TMC2160Stepper : public TMC2130Stepper {
 		using TMC2130Stepper::pwm_ampl;
 		using TMC2130Stepper::pwm_symmetric;
 
-		INIT_REGISTER(SHORT_CONF){{.sr=0}};
-		INIT_REGISTER(DRV_CONF){{.sr=0}};
-		INIT_REGISTER(GLOBAL_SCALER){.sr=0};
-		INIT2160_REGISTER(PWMCONF){{.sr=0}};
+		INIT_REGISTER(SHORT_CONF);
+		INIT_REGISTER(DRV_CONF);
+		INIT_REGISTER(GLOBAL_SCALER);
+		INIT2160_REGISTER(PWMCONF);
 
 		static constexpr float default_RS = 0.075;
 };

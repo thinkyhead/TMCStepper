@@ -6,7 +6,7 @@
  */
 #pragma once
 
-#define INIT2130_REGISTER(REG) TMC2130_n::REG##_t REG##_register = TMC2130_n::REG##_t
+#define INIT2130_REGISTER(REG) TMC2130_n::REG##_t REG##_register{0}
 
 class TMC2130Stepper : public TMCStepper {
 	public:
@@ -210,16 +210,16 @@ class TMC2130Stepper : public TMCStepper {
 		void write(uint8_t addressByte, uint32_t config);
 		uint32_t read(uint8_t addressByte);
 
-		INIT_REGISTER(GCONF){{.sr=0}};		// 32b
-		INIT_REGISTER(TCOOLTHRS){.sr=0};	// 32b
-		INIT_REGISTER(THIGH){.sr=0};			// 32b
-		INIT_REGISTER(XDIRECT){{.sr=0}};	// 32b
-		INIT_REGISTER(VDCMIN){.sr=0};			// 32b
-		INIT_REGISTER(CHOPCONF){{.sr=0}};	// 32b
-		INIT_REGISTER(COOLCONF){{.sr=0}};	// 32b
-		INIT_REGISTER(DCCTRL){{.sr = 0}};	// 32b
-		INIT_REGISTER(PWMCONF){{.sr=0}};	// 32b
-		INIT_REGISTER(ENCM_CTRL){{.sr=0}};//  8b
+		INIT_REGISTER(GCONF);			// 32b
+		INIT_REGISTER(TCOOLTHRS);	// 32b
+		INIT_REGISTER(THIGH);			// 32b
+		INIT_REGISTER(XDIRECT);		// 32b
+		INIT_REGISTER(VDCMIN);		// 32b
+		INIT_REGISTER(CHOPCONF);	// 32b
+		INIT_REGISTER(COOLCONF);	// 32b
+		INIT_REGISTER(DCCTRL);		// 32b
+		INIT_REGISTER(PWMCONF);		// 32b
+		INIT_REGISTER(ENCM_CTRL);	//  8b
 
 		struct IOINT_t 			{ constexpr static uint8_t address = 0x04; };
 		struct PWM_SCALE_t 	{ constexpr static uint8_t address = 0x71; };

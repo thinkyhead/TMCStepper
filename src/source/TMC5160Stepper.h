@@ -6,7 +6,7 @@
  */
 #pragma once
 
-#define INIT5160_REGISTER(REG) TMC5160_n::REG##_t REG##_register = TMC5160_n::REG##_t
+#define INIT5160_REGISTER(REG) TMC5160_n::REG##_t REG##_register{0}
 
 class TMC5160Stepper : public TMC5130Stepper {
 	public:
@@ -97,7 +97,7 @@ class TMC5160Stepper : public TMC5130Stepper {
 		using TMC5130Stepper::vsense;
 		using TMC5130Stepper::rndtf;
 
-		INIT_REGISTER(ENC_DEVIATION){.sr=0};
+		INIT_REGISTER(ENC_DEVIATION);
 
 		static constexpr float default_RS = 0.075;
 };

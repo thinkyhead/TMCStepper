@@ -6,6 +6,8 @@
  */
 #pragma once
 
+#define INIT2209_REGISTER(REG) TMC2209_n::REG##_t REG##_register{0}
+
 class TMC2209Stepper : public TMC2208Stepper {
 	public:
 		TMC2209Stepper(Stream * SerialPort, float RS, uint8_t addr) :
@@ -57,7 +59,7 @@ class TMC2209Stepper : public TMC2208Stepper {
 		bool seimin();
 
 	protected:
-		INIT_REGISTER(TCOOLTHRS){.sr=0};
-		TMC2209_n::SGTHRS_t SGTHRS_register{.sr=0};
-		TMC2209_n::COOLCONF_t COOLCONF_register{{.sr=0}};
+		INIT_REGISTER(TCOOLTHRS);
+		INIT2209_REGISTER(SGTHRS);
+		INIT2209_REGISTER(COOLCONF);
 };

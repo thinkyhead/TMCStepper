@@ -6,7 +6,7 @@
  */
 #pragma once
 
-#define INIT2224_REGISTER(REG) TMC2224_n::REG##_t REG##_register = TMC2224_n::REG##_t
+#define INIT2224_REGISTER(REG) TMC2224_n::REG##_t REG##_register{0}
 
 class TMC2224Stepper : public TMC2208Stepper {
 	public:

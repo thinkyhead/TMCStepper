@@ -6,7 +6,7 @@
  */
 #pragma once
 
-#define INIT2208_REGISTER(REG) TMC2208_n::REG##_t REG##_register = TMC2208_n::REG##_t
+#define INIT2208_REGISTER(REG) TMC2208_n::REG##_t REG##_register{0}
 
 class TMC2208Stepper : public TMCStepper {
 	public:
@@ -173,12 +173,12 @@ class TMC2208Stepper : public TMCStepper {
 		float Rsense = 0.11;
 		bool CRCerror = false;
 	protected:
-		INIT2208_REGISTER(GCONF)		{{.sr=0}};
-		INIT_REGISTER(SLAVECONF)		{{.sr=0}};
-		INIT_REGISTER(FACTORY_CONF)	{{.sr=0}};
-		INIT2208_REGISTER(VACTUAL)	{.sr=0};
-		INIT2208_REGISTER(CHOPCONF)	{{.sr=0}};
-		INIT2208_REGISTER(PWMCONF)	{{.sr=0}};
+		INIT2208_REGISTER(GCONF);
+		INIT_REGISTER(SLAVECONF);
+		INIT_REGISTER(FACTORY_CONF);
+		INIT2208_REGISTER(VACTUAL);
+		INIT2208_REGISTER(CHOPCONF);
+		INIT2208_REGISTER(PWMCONF);
 
 		struct IFCNT_t			{ constexpr static uint8_t address = 0x02; };
 		struct OTP_PROG_t		{ constexpr static uint8_t address = 0x04; };

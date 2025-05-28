@@ -61,7 +61,8 @@
 
 #pragma GCC diagnostic pop
 
-#define INIT_REGISTER(REG) REG##_t REG##_register = REG##_t
+// Usage: INIT_REGISTER(GCONF);  // Result: GCONF_t GCONF_register{0};
+#define INIT_REGISTER(REG) REG##_t REG##_register{0}
 #define SET_ALIAS(TYPE, DRIVER, NEW, ARG, OLD) TYPE (DRIVER::*NEW)(ARG) = &DRIVER::OLD
 
 #define TMCSTEPPER_VERSION 0x000803 // v0.8.3 - Marlin bumps minor version

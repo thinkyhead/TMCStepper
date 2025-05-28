@@ -64,9 +64,9 @@ class TMCStepper {
 
 	protected:
 		TMCStepper(float RS) : Rsense(RS) {};
-		INIT_REGISTER(IHOLD_IRUN){{.sr=0}};	// 32b
-		INIT_REGISTER(TPOWERDOWN){.sr=0};		// 8b
-		INIT_REGISTER(TPWMTHRS){.sr=0};			// 32b
+		INIT_REGISTER(IHOLD_IRUN);	// 32b
+		INIT_REGISTER(TPOWERDOWN);	// 8b
+		INIT_REGISTER(TPWMTHRS);	// 32b
 
 		static constexpr uint8_t TMC_READ = 0x00, TMC_WRITE = 0x80;
 
