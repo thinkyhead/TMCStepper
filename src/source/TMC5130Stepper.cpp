@@ -25,7 +25,9 @@ void TMC5130Stepper::begin() {
 
 void TMC5130Stepper::defaults() {
   OUTPUT_register.sr = 1;
+
   ENC_CONST_register.sr = 65536;
+
   //MSLUT0_register.sr = ???;
   //MSLUT1_register.sr = ???;
   //MSLUT2_register.sr = ???;
@@ -34,10 +36,21 @@ void TMC5130Stepper::defaults() {
   //MSLUT5_register.sr = ???;
   //MSLUT6_register.sr = ???;
   //MSLUT7_register.sr = ???;
+
   //MSLUTSEL_register.sr = ???;
+
   //MSLUTSTART_register.start_sin = 0;
   //MSLUTSTART_register.start_sin90 = 247;
-  PWMCONF_register.sr = 0x00050480;
+
+  //PWMCONF_register.sr = 0x00050480;   // TMC2160_t::PWMCONF_t
+  PWMCONF_register.pwm_ofs       = 128;
+  PWMCONF_register.pwm_grad      = 4;
+  PWMCONF_register.pwm_freq      = 1;
+  PWMCONF_register.pwm_autoscale = true;
+  PWMCONF_register.pwm_autograd  = false;
+  PWMCONF_register.freewheel     = 0;
+  PWMCONF_register.pwm_reg       = 0;
+  PWMCONF_register.pwm_lim       = 0;
 }
 
 void TMC5130Stepper::push() {

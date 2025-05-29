@@ -20,14 +20,19 @@ void TMC5160Stepper::defaults() {
   SHORT_CONF_register.s2g_level = 6;
   SHORT_CONF_register.shortfilter = 0b01;
   SHORT_CONF_register.shortdelay = 0;
+
   DRV_CONF_register.bbmtime = 0;
   DRV_CONF_register.bbmclks = 4;
   DRV_CONF_register.otselect = 0b00;
   DRV_CONF_register.drvstrength = 0b10;
   DRV_CONF_register.filt_isense = 0b00;
+
   TPOWERDOWN_register.sr = 10;
+
   VSTOP_register.sr = 1;
+
   ENC_CONST_register.sr = 65536;
+
   //MSLUT0_register.sr = ???;
   //MSLUT1_register.sr = ???;
   //MSLUT2_register.sr = ???;
@@ -36,11 +41,38 @@ void TMC5160Stepper::defaults() {
   //MSLUT5_register.sr = ???;
   //MSLUT6_register.sr = ???;
   //MSLUT7_register.sr = ???;
+
   //MSLUTSEL_register.sr = ???;
+
   //MSLUTSTART_register.start_sin = 0;
   //MSLUTSTART_register.start_sin90 = 247;
-  CHOPCONF_register.sr = 0x10410150;
-  PWMCONF_register.sr = 0xC40C001E;
+
+  //CHOPCONF_register.sr = 0x10410150;
+  CHOPCONF_register.toff     = 0;
+  CHOPCONF_register.hstrt    = 5;
+  CHOPCONF_register.hend     = 2;
+  CHOPCONF_register.disfdcc  = false;
+  CHOPCONF_register.rndtf    = false;
+  CHOPCONF_register.chm      = false;
+  CHOPCONF_register.tbl      = 2;
+  CHOPCONF_register.vsense   = false;
+  CHOPCONF_register.vhighfs  = false;
+  CHOPCONF_register.vhighchm = false;
+  CHOPCONF_register.sync     = 4;
+  CHOPCONF_register.mres     = 0;
+  CHOPCONF_register.intpol   = true;
+  CHOPCONF_register.dedge    = false;
+  CHOPCONF_register.diss2g   = false;
+
+  //PWMCONF_register.sr = 0xC40C001E;
+  PWMCONF_register.pwm_ofs       = 30;
+  PWMCONF_register.pwm_grad      = 0;
+  PWMCONF_register.pwm_freq      = 0;
+  PWMCONF_register.pwm_autoscale = true;
+  PWMCONF_register.pwm_autograd  = true;
+  PWMCONF_register.freewheel     = 0;
+  PWMCONF_register.pwm_reg       = 4;
+  PWMCONF_register.pwm_lim       = 12;
 }
 
 void TMC5160Stepper::push() {

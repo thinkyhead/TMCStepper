@@ -203,11 +203,11 @@ class TMC5130Stepper : public TMC2160Stepper {
 		INIT_REGISTER(ENCMODE);
 		INIT_REGISTER(ENC_CONST);
 
-		struct IFCNT_t 		{ constexpr static uint8_t address = 0x02; }; // R
-		struct VACTUAL_t 	{ constexpr static uint8_t address = 0x22; }; // R
-		struct XTARGET_t 	{ constexpr static uint8_t address = 0x2D; }; // RW
-		struct XLATCH_t 	{ constexpr static uint8_t address = 0x36; }; // R
-		struct X_ENC_t 		{ constexpr static uint8_t address = 0x39; }; // RW
+		struct IFCNT_t 			{ constexpr static uint8_t address = 0x02; }; // R
+		struct VACTUAL_t 		{ constexpr static uint8_t address = 0x22; }; // R
+		struct XTARGET_t 		{ constexpr static uint8_t address = 0x2D; }; // RW
+		struct XLATCH_t 		{ constexpr static uint8_t address = 0x36; }; // R
+		struct X_ENC_t 			{ constexpr static uint8_t address = 0x39; }; // RW
 		struct ENC_STATUS_t { constexpr static uint8_t address = 0x3B; }; // R+C
 		struct ENC_LATCH_t 	{ constexpr static uint8_t address = 0x3C; }; // R
 

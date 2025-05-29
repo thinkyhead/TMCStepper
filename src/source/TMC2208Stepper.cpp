@@ -66,19 +66,42 @@ void TMC2208Stepper::defaults() {
 	GCONF_register.internal_rsense = 0; // OTP
 	GCONF_register.en_spreadcycle = 0; // OTP
 	GCONF_register.multistep_filt = 1; // OTP
+
 	IHOLD_IRUN_register.iholddelay = 1; // OTP
+
 	TPOWERDOWN_register.sr = 20;
-	CHOPCONF_register.sr = 0x10000053; // 1/16 x 256 single-edge
-	PWMCONF_register.sr = 0xC10D0024; // autoscale=1, freq=01, grad & amp, freewheel=00
-  //MSLUT0_register.sr = ???;
-  //MSLUT1_register.sr = ???;
-  //MSLUT2_register.sr = ???;
-  //MSLUT3_register.sr = ???;
-  //MSLUT4_register.sr = ???;
-  //MSLUT5_register.sr = ???;
-  //MSLUT6_register.sr = ???;
-  //MSLUT7_register.sr = ???;
-  //MSLUTSTART_register.start_sin90 = 247;
+
+	//CHOPCONF_register.sr = 0x10000053;
+	CHOPCONF_register.toff		= 3;
+	CHOPCONF_register.hstrt		= 5;
+	CHOPCONF_register.hend		= 0;
+	CHOPCONF_register.tbl		= 0;
+	CHOPCONF_register.vsense	= false;
+	CHOPCONF_register.mres		= 0;
+	CHOPCONF_register.intpol	= true;
+	CHOPCONF_register.dedge		= false;
+	CHOPCONF_register.diss2g	= false;
+	CHOPCONF_register.diss2vs	= false;
+
+	//PWMCONF_register.sr = 0xC10D0024;
+    PWMCONF_register.pwm_ofs		= 36;
+    PWMCONF_register.pwm_grad		= 0;
+    PWMCONF_register.pwm_freq		= 1;
+    PWMCONF_register.pwm_autoscale	= true;
+    PWMCONF_register.pwm_autograd	= true;
+    PWMCONF_register.freewheel		= 0;
+    PWMCONF_register.pwm_reg		= 1;
+    PWMCONF_register.pwm_lim		= 12;
+
+	//MSLUT0_register.sr = ???;
+	//MSLUT1_register.sr = ???;
+	//MSLUT2_register.sr = ???;
+	//MSLUT3_register.sr = ???;
+	//MSLUT4_register.sr = ???;
+	//MSLUT5_register.sr = ???;
+	//MSLUT6_register.sr = ???;
+	//MSLUT7_register.sr = ???;
+	//MSLUTSTART_register.start_sin90 = 247;
 }
 
 void TMC2208Stepper::push() {

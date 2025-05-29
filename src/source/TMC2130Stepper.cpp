@@ -56,7 +56,14 @@ void TMC2130Stepper::defaults() {
   //MSLUT6_register.sr = ???;
   //MSLUT7_register.sr = ???;
   //MSLUTSTART_register.start_sin90 = 247;
-  PWMCONF_register.sr = 0x00050480;
+
+  //PWMCONF_register.sr = 0x00050480;
+  PWMCONF_register.pwm_ampl       = 128;
+  PWMCONF_register.pwm_grad       = 4;
+  PWMCONF_register.pwm_freq       = 1;
+  PWMCONF_register.pwm_autoscale  = true;
+  PWMCONF_register.pwm_symmetric  = false;
+  PWMCONF_register.freewheel      = 0;
 }
 
 __attribute__((weak))

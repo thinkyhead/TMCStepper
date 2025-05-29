@@ -37,8 +37,34 @@ void TMC2240Stepper::defaults() {
 	IHOLD_IRUN_register.iholddelay = 1;
 	TPOWERDOWN_register.sr = 20;
 
-	CHOPCONF_register.sr = 0x000100C3; 	// SpreadCycle, 1/16 * 256, vsense=0, toff=3, tbl=2
-	PWMCONF_register.sr = 0x00050480; 	// StealthChop2, autoscale, grad=4, ampl=128, ofs=64
+	// CHOPCONF_register.sr = 0x10010150;
+	CHOPCONF_register.toff     = 0;
+	CHOPCONF_register.hstrt    = 5;
+	CHOPCONF_register.hend     = 2;
+	CHOPCONF_register.fd3      = false;
+	CHOPCONF_register.disfdcc  = false;
+	CHOPCONF_register.chm      = false;
+	CHOPCONF_register.TBL      = 0b10;
+	CHOPCONF_register.vhighfs  = false;
+	CHOPCONF_register.vhighchm = false;
+	CHOPCONF_register.tpfd     = 0; 		// leave 0 ?
+	CHOPCONF_register.mres     = 0;
+	CHOPCONF_register.intpol   = true;
+	CHOPCONF_register.dedge    = false;
+	CHOPCONF_register.diss2g   = false;
+	CHOPCONF_register.diss2vs  = false;
+
+	//PWMCONF_register.sr = 0xC40C001E;
+	PWMCONF_register.pwm_ofs            = 30;
+	PWMCONF_register.pwm_grad           = 0;
+	PWMCONF_register.pwm_freq           = 0;
+	PWMCONF_register.pwm_autoscale      = true;
+	PWMCONF_register.pwm_autograd       = true;
+	PWMCONF_register.freewheel          = 0;
+	PWMCONF_register.pwm_meas_sd_enable = false;
+	PWMCONF_register.pwm_dis_reg_stst   = false;
+	PWMCONF_register.pwm_reg            = 4;
+	PWMCONF_register.pwm_lim            = 12;
 }
 
 __attribute__((weak))

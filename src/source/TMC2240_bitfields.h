@@ -3,11 +3,14 @@
  * TMC2240_bitfields.h
  *
  * TMC2240 hardware register bit fields:
- * CHOPCONF, DEVCONF, COOLCONF, PWMCONF
- * IHOLD_IRUN
- * TPOWERDOWN, TPWMTHRS, TCOOLTHRS
- * SG4_THRS
+ * CHOPCONF, COOLCONF, DRV_CONF, PWMCONF, SLAVECONF
+ * TPOWERDOWN, TSTEP, TPWMTHRS, TCOOLTHRS, THIGH
+ * SG4_THRS, SG4_RESULT, SG4_IND
  * GCONF, GSTAT
+ * IOIN, GLOBAL_SCALER
+ * IHOLD_IRUN
+ * DRV_STATUS
+ * PWM_SCALE, PWM_AUTO
  */
 #pragma once
 #pragma pack(push, 1)
@@ -48,16 +51,6 @@ namespace TMC2240_n {
                uv_cp          : 1,
                register_reset : 1,
                vm_uvlo        : 1;
-      };
-    };
-  };
-
-  struct TPOWERDOWN_t {
-    constexpr static uint8_t address = 0x11;
-    union {
-      uint32_t sr;
-      struct {
-        uint16_t TPOWERDOWN : 8;
       };
     };
   };
@@ -107,34 +100,9 @@ namespace TMC2240_n {
       uint32_t sr;
       struct {
         uint8_t current_range : 2,
-                              : 2, 	// unused
+                              : 2,  // unused
                 slope_control : 2;
         uint16_t              : 16; // unused
-      };
-    };
-  };
-
-  struct DRV_STATUS_t {
-    constexpr static uint8_t address = 0x6F;
-    union {
-      uint32_t sr;
-      struct {
-        uint16_t SG_RESULT : 10;
-        uint8_t            : 2; // unused
-        uint8_t      s2vsa : 1,
-                     s2vsb : 1,
-                   stealth : 1,
-                  fsactive : 1;
-        uint16_t CS_ACTUAL : 5;
-        uint8_t            : 3; // unused
-        bool    stallguard : 1,
-                        ot : 1,
-                      otpw : 1,
-                      s2ga : 1,
-                      s2gb : 1,
-                       ola : 1,
-                       olb : 1,
-                      stst : 1;
       };
     };
   };
@@ -161,6 +129,16 @@ namespace TMC2240_n {
             iholddelay : 4,
                        : 4, // unused
             irundelay  : 4;
+      };
+    };
+  };
+
+  struct TPOWERDOWN_t {
+    constexpr static uint8_t address = 0x11;
+    union {
+      uint32_t sr;
+      struct {
+        uint16_t TPOWERDOWN : 8;
       };
     };
   };
@@ -252,21 +230,46 @@ namespace TMC2240_n {
     };
   };
 
-  struct PWMCONF_t {
-    constexpr static uint8_t address = 0x70;
+  struct DRV_STATUS_t {
+    constexpr static uint8_t address = 0x6F;
     union {
       uint32_t sr;
       struct {
-        uint8_t pwm_ofs            : 8,
-                pwm_grad           : 8,
-                pwm_freq           : 2;
-        bool    pwm_autoscale      : 1,
-                pwm_autograd       : 1;
-        uint8_t freewheel          : 2;
-        bool    pwm_meas_sd_enable : 1,
-                pwm_dis_reg_stst   : 1;
-        uint8_t pwm_reg            : 4,
-                pwm_lim            : 4;
+        uint16_t SG_RESULT : 10;
+        uint8_t            : 2; // unused
+        uint8_t      s2vsa : 1,
+                     s2vsb : 1,
+                   stealth : 1,
+                  fsactive : 1;
+        uint16_t CS_ACTUAL : 5;
+        uint8_t            : 3; // unused
+        bool    stallguard : 1,
+                        ot : 1,
+                      otpw : 1,
+                      s2ga : 1,
+                      s2gb : 1,
+                       ola : 1,
+                       olb : 1,
+                      stst : 1;
+      };
+    };
+  };
+
+  struct PWMCONF_t {
+    constexpr static uint8_t address = 0x70;
+    union {
+      uint32_t sr;                      // 0x00050480  0xC40C1E1D
+      struct {
+        uint8_t pwm_ofs            : 8, // 128         29
+                pwm_grad           : 8, // 4           30
+                pwm_freq           : 2; // 1           0
+        bool    pwm_autoscale      : 1, // true        true
+                pwm_autograd       : 1; // false       true
+        uint8_t freewheel          : 2; // 0           0
+        bool    pwm_meas_sd_enable : 1, // false       false
+                pwm_dis_reg_stst   : 1; // false       false
+        uint8_t pwm_reg            : 4, // 0           4
+                pwm_lim            : 4; // 0           12
       };
     };
   };

@@ -105,6 +105,7 @@ struct DRVCONF_t {
   };
 };
 
+// Populated by TMC2660Stepper::DRVSTATUS()
 struct READ_RDSEL00_t {
   union {
     uint32_t sr;
