@@ -364,8 +364,8 @@ void TMC2208Stepper::FACTORY_CONF(uint16_t input) {
 }
 void TMC2208Stepper::fclktrim(uint8_t B){ FACTORY_CONF_register.fclktrim = B; write(FACTORY_CONF_register.address, FACTORY_CONF_register.sr); }
 void TMC2208Stepper::ottrim(uint8_t B)	{ FACTORY_CONF_register.ottrim = B; write(FACTORY_CONF_register.address, FACTORY_CONF_register.sr); }
-uint8_t TMC2208Stepper::fclktrim()		{ FACTORY_CONF_t r{0}; r.sr = FACTORY_CONF(); return r.fclktrim; }
-uint8_t TMC2208Stepper::ottrim()		{ FACTORY_CONF_t r{0}; r.sr = FACTORY_CONF(); return r.ottrim; }
+uint8_t TMC2208Stepper::fclktrim()		{ FACTORY_CONF_t r{}; r.sr = FACTORY_CONF(); return r.fclktrim; }
+uint8_t TMC2208Stepper::ottrim()		{ FACTORY_CONF_t r{}; r.sr = FACTORY_CONF(); return r.ottrim; }
 
 void TMC2208Stepper::VACTUAL(uint32_t input) {
 	VACTUAL_register.sr = input;
@@ -379,13 +379,13 @@ uint32_t TMC2208Stepper::PWM_SCALE() {
 	return read(TMC2208_n::PWM_SCALE_t::address);
 }
 uint8_t TMC2208Stepper::pwm_scale_sum() {
-	TMC2208_n::PWM_SCALE_t r{0};
+	TMC2208_n::PWM_SCALE_t r{};
 	r.sr = PWM_SCALE();
 	return r.pwm_scale_sum;
 }
 
 int16_t TMC2208Stepper::pwm_scale_auto() {
-	TMC2208_n::PWM_SCALE_t r{0};
+	TMC2208_n::PWM_SCALE_t r{};
 	r.sr = PWM_SCALE();
 	return r.pwm_scale_auto;
 	// Not two's complement? 9nth bit determines sign
@@ -401,5 +401,5 @@ int16_t TMC2208Stepper::pwm_scale_auto() {
 uint32_t TMC2208Stepper::PWM_AUTO() {
 	return read(PWM_AUTO_t::address);
 }
-uint8_t TMC2208Stepper::pwm_ofs_auto()  { PWM_AUTO_t r{0}; r.sr = PWM_AUTO(); return r.pwm_ofs_auto; }
-uint8_t TMC2208Stepper::pwm_grad_auto() { PWM_AUTO_t r{0}; r.sr = PWM_AUTO(); return r.pwm_grad_auto; }
+uint8_t TMC2208Stepper::pwm_ofs_auto()  { PWM_AUTO_t r{}; r.sr = PWM_AUTO(); return r.pwm_ofs_auto; }
+uint8_t TMC2208Stepper::pwm_grad_auto() { PWM_AUTO_t r{}; r.sr = PWM_AUTO(); return r.pwm_grad_auto; }

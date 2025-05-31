@@ -6,12 +6,12 @@
 #include "../TMCStepper.h"
 #include "TMC_MACROS.h"
 
-#define GET_REG_NS(NS, SETTING) NS::IOIN_t r{0}; r.sr = IOIN(); return r.SETTING
+#define GET_REG_NS(NS, SETTING) NS::IOIN_t r{}; r.sr = IOIN(); return r.SETTING
 
 //
 // TMC2130
 //
-#define GET_REG(SETTING) IOIN_t r{0}; r.sr = IOIN(); return r.SETTING
+#define GET_REG(SETTING) IOIN_t r{}; r.sr = IOIN(); return r.SETTING
 
 uint32_t TMC2130Stepper::IOIN()			{ return read(IOIN_t::address); }
 bool	TMC2130Stepper::step()			{ GET_REG(step);		}

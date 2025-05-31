@@ -170,5 +170,5 @@ uint16_t TMC2160Stepper::OFFSET_READ() { return read(OFFSET_READ_t::address); }
 uint32_t TMC2160Stepper::PWM_SCALE() {
   return read(TMC2160_n::PWM_SCALE_t::address);
 }
-uint8_t TMC2160Stepper::pwm_scale_sum()   { TMC2160_n::PWM_SCALE_t r{0}; r.sr = PWM_SCALE(); return r.pwm_scale_sum; }
-uint16_t TMC2160Stepper::pwm_scale_auto() { TMC2160_n::PWM_SCALE_t r{0}; r.sr = PWM_SCALE(); return r.pwm_scale_auto; }
+uint8_t TMC2160Stepper::pwm_scale_sum()   { TMC2160_n::PWM_SCALE_t r{}; r.sr = PWM_SCALE(); return r.pwm_scale_sum; }
+uint16_t TMC2160Stepper::pwm_scale_auto() { TMC2160_n::PWM_SCALE_t r{}; r.sr = PWM_SCALE(); return r.pwm_scale_auto; }

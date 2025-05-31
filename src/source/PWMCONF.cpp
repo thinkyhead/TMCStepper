@@ -66,7 +66,7 @@ uint8_t TMC2160Stepper::pwm_lim()		{ GET_REG(pwm_lim);			}
 //
 // TMC2208 (TMC2209, TMC2224)
 //
-#define GET_REG_2208(SETTING) TMC2208_n::PWMCONF_t r{0}; r.sr = PWMCONF(); return r.SETTING
+#define GET_REG_2208(SETTING) TMC2208_n::PWMCONF_t r{}; r.sr = PWMCONF(); return r.SETTING
 
 uint32_t TMC2208Stepper::PWMCONF() {
 	return read(PWMCONF_register.address);
@@ -97,7 +97,7 @@ uint8_t TMC2208Stepper::pwm_lim()		{ GET_REG_2208(pwm_lim);		}
 //
 // TMC2240
 //
-#define GET_REG_2240(SETTING) TMC2240_n::PWMCONF_t r{0}; r.sr = PWMCONF(); return r.SETTING
+#define GET_REG_2240(SETTING) TMC2240_n::PWMCONF_t r{}; r.sr = PWMCONF(); return r.SETTING
 
 uint32_t TMC2240Stepper::PWMCONF() { return PWMCONF_register.sr; }
 void TMC2240Stepper::PWMCONF(uint32_t input) {

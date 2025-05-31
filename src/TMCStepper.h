@@ -61,11 +61,11 @@
 
 #pragma GCC diagnostic pop
 
-// Usage: INIT_REGISTER(GCONF);  // Result: GCONF_t GCONF_register{0};
-#define INIT_REGISTER(REG) REG##_t REG##_register{0}
+// Usage: INIT_REGISTER(GCONF);  // Result: GCONF_t GCONF_register{};
+#define INIT_REGISTER(REG) REG##_t REG##_register{}
 #define SET_ALIAS(TYPE, DRIVER, NEW, ARG, OLD) TYPE (DRIVER::*NEW)(ARG) = &DRIVER::OLD
 
-#define TMCSTEPPER_VERSION 0x000804 // v0.8.4 - Marlin bumps minor version
+#define TMCSTEPPER_VERSION 0x000805 // v0.8.5 - Marlin bumps minor version
 
 #include "source/TMC2130_bitfields.h"
 #include "source/TMC2160_bitfields.h"

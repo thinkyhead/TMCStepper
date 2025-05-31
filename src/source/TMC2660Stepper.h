@@ -6,7 +6,7 @@
  */
 #pragma once
 
-#define INIT2660_REGISTER(REG) TMC2660_n::REG##_t REG##_register{0}
+#define INIT2660_REGISTER(REG) TMC2660_n::REG##_t REG##_register{}
 
 class TMC2660Stepper {
 	public:

@@ -6,7 +6,7 @@
 #include "../TMCStepper.h"
 #include "TMC_MACROS.h"
 
-#define GET_REG(NS, SETTING) NS::DRV_STATUS_t r{0}; r.sr = DRV_STATUS(); return r.SETTING
+#define GET_REG(NS, SETTING) NS::DRV_STATUS_t r{}; r.sr = DRV_STATUS(); return r.SETTING
 
 //
 // TMC2130 (TMC2160, TMC5130, TMC5160, TMC5161)

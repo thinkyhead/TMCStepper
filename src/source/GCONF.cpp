@@ -6,7 +6,7 @@
 #include "../TMCStepper.h"
 #include "TMC_MACROS.h"
 
-#define GET_REG(SETTING) GCONF_t r{0}; r.sr = GCONF(); return r.SETTING
+#define GET_REG(SETTING) GCONF_t r{}; r.sr = GCONF(); return r.SETTING
 #define SET_REG(SETTING) GCONF_register.SETTING = B; write(GCONF_register.address, GCONF_register.sr)
 
 //
@@ -80,7 +80,7 @@ bool TMC5160Stepper::multistep_filt()				{ GET_REG(multistep_filt);	}
 //
 // TMC2208 (TMC2209, TMC2224)
 //
-#define GET_REG_2208(SETTING) TMC2208_n::GCONF_t r{0}; r.sr = GCONF(); return r.SETTING
+#define GET_REG_2208(SETTING) TMC2208_n::GCONF_t r{}; r.sr = GCONF(); return r.SETTING
 
 uint32_t TMC2208Stepper::GCONF() {
 	return read(GCONF_register.address);
@@ -113,7 +113,7 @@ bool TMC2208Stepper::multistep_filt()	{ GET_REG_2208(multistep_filt);		}
 //
 // TMC2240
 //
-#define GET_REG_2240(SETTING) TMC2240_n::GCONF_t r{0}; r.sr = GCONF(); return r.SETTING
+#define GET_REG_2240(SETTING) TMC2240_n::GCONF_t r{}; r.sr = GCONF(); return r.SETTING
 
 uint32_t TMC2240Stepper::GCONF() { return read(GCONF_register.address); }
 void TMC2240Stepper::GCONF(uint32_t input) {
