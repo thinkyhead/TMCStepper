@@ -65,7 +65,7 @@
 #define INIT_REGISTER(REG) REG##_t REG##_register{}
 #define SET_ALIAS(TYPE, DRIVER, NEW, ARG, OLD) TYPE (DRIVER::*NEW)(ARG) = &DRIVER::OLD
 
-#define TMCSTEPPER_VERSION 0x000806 // v0.8.6 - Marlin bumps minor version
+#define TMCSTEPPER_VERSION 0x000807 // v0.8.7 - Marlin bumps minor version
 
 #include "source/TMC2130_bitfields.h"
 #include "source/TMC2160_bitfields.h"
