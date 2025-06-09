@@ -21,6 +21,11 @@
 #include "../TMCStepper.h"
 #include "TMC_MACROS.h"
 
+// Make sure the endianness is correct
+#if __BYTE_ORDER__ != __ORDER_LITTLE_ENDIAN__
+  #error "TMCStepper does not currently support Big Endian targets!"
+#endif
+
 /*
   Requested current = mA = I_rms/1000
   Equation for current:
