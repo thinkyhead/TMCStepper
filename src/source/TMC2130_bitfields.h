@@ -37,8 +37,8 @@ struct GCONF_t {
             diag1_pushpull      : 1,
             small_hysteresis    : 1,
             stop_enable         : 1,
-            direct_mode         : 1,
-                                : 15; // unused
+            direct_mode         : 1;
+      uint16_t                  : 15; // unused
     };
     struct { // TMC5160
       bool recalibrate            : 1,
@@ -49,8 +49,8 @@ struct GCONF_t {
            diag0_step             : 1,
            diag1_dir              : 1,
                                   : 4,
-           diag1_poscomp_pushpull : 1,
-                                  : 18; // unused
+           diag1_poscomp_pushpull : 1;
+      uint32_t                    : 18; // unused
     };
   };
 };
@@ -94,8 +94,8 @@ struct IOIN_t {
             dcin_cfg5    : 1,
             drv_enn_cfg6 : 1,
             dco          : 1,
-                         : 2;
-      uint16_t           : 16;
+                         : 2;  // unused
+      uint16_t           : 16; // unused
       uint8_t version    : 8;
     };
   };
