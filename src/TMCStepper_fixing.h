@@ -7,29 +7,29 @@ namespace _TMC_FIXING
 
 // BEGIN https://en.cppreference.com/w/cpp/types/add_reference
 namespace detail {
- 
+
 template <class T>
 struct type_identity { using type = T; };
- 
+
 template <class T>
 auto try_add_rvalue_reference(int) -> type_identity<T&&>;
 template <class T>
 auto try_add_rvalue_reference(...) -> type_identity<T>;
- 
+
 } // namespace detail
- 
+
 template <class T>
 struct add_rvalue_reference : decltype(detail::try_add_rvalue_reference<T>(0)) {};
 
 // END https://en.cppreference.com/w/cpp/types/add_reference
-    
+
 // BEGIN https://en.cppreference.com/w/cpp/utility/declval (inspired)
 template<typename T>
 struct always_false
 {
 	enum { value = false };
 };
- 
+
 template<typename T>
 typename add_rvalue_reference<T>::type declval() {
     static_assert(always_false<T>::value, "declval not allowed in an evaluated context");
@@ -104,4 +104,4 @@ SPI_SET_PIN_HELPER( SCLK );
 	  spi.begin(); }
 #endif
 
-#endif //TMC_NO_GENERIC_SPI
+#endif // TMC_NO_GENERIC_SPI
