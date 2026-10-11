@@ -56,14 +56,14 @@ var NAVTREEINDEX =
 "_c_h_o_p_c_o_n_f_8cpp.html",
 "class_t_m_c2130_stepper.html#a263a877ca5e91f01727c3bf7c998c76f",
 "class_t_m_c2208_stepper.html#a2576f25049dff1a3102da1ea5b4eb7fc",
-"class_t_m_c2240_stepper.html#a485f6a4b248da793eaeef7689bf12209",
-"class_t_m_c2660_stepper.html#a70544173e9657224640cf08097ebac19",
-"class_t_m_c5130_stepper.html#afff5a7b8d79d2575ae5b3061e463ba3d",
-"struct_c_h_o_p_c_o_n_f__t.html#a732d965d87ab7e2db879c50d6e4c2d55",
-"struct_s_h_o_r_t___c_o_n_f__t.html#aece22549cb8e85787bf16ee283291417",
-"struct_t_m_c2208__n_1_1_p_w_m_c_o_n_f__t.html#a2b6dff95880880def3ff913142577af3",
-"struct_t_m_c2240__n_1_1_g_c_o_n_f__t.html#ac20589556d13ec256d395f67d78678d5",
-"struct_t_m_c2240__n_1_1_t_h_i_g_h__t.html#a937afc362ec88f4972f5773b88b94a04"
+"class_t_m_c2240_stepper.html#a4cb41cd822ddcbbf558a31f43ee55221",
+"class_t_m_c2660_stepper.html#a90e88f991704c5fc7cdcb7212db59020",
+"class_t_m_c5160_stepper.html#a3ba35a360848e443ea4321ab208b3871",
+"struct_c_o_o_l_c_o_n_f__t.html#a8a0b1d9f35fbdc18a795e61b4a6077c0",
+"struct_s_w___m_o_d_e__t.html#a11c10322841539f624836d78bed7278e",
+"struct_t_m_c2209__n_1_1_c_o_o_l_c_o_n_f__t.html",
+"struct_t_m_c2240__n_1_1_g_s_t_a_t__t.html#aca53809515c779ba7dd70ce682b6bf1a",
+"struct_t_m_c2240__n_1_1_t_s_t_e_p__t.html#a166059be46b2c5663390e039e06528c5"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

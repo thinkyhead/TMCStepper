@@ -5,18 +5,18 @@ This library works with any Arduino compatible board (Arduino, STM32, NXP, etc) 
 
 | Drivers  | Support | Supply       | Max RMS       | Interface | CoolStep™  | StallGuard™  | StealthChop™  |
 | :------: | :-----: | :----------: | :-----------: | :-------: | :--------: | :-----------:| :------------:|
-| [TMC2130](//teemuatlut.github.io/TMCStepper/class_t_m_c2130_stepper.html) | ✅      | 5…46V        | 1.4A          | SPI       | ✅          | ✅ v2        | ✅ v1 |
-| [TMC2160](//teemuatlut.github.io/TMCStepper/class_t_m_c2160_stepper.html) | ✅      | 8…60V        | ext. MOSFETs  | SPI       | ✅          | ✅ v2        | ✅ v2 |
-| [TMC2208](//teemuatlut.github.io/TMCStepper/class_t_m_c2208_stepper.html) | ✅      | 4.75…36V     | 1.4A          | UART      | ❌          | ❌           | ✅ v2 |
-| [TMC2209](//teemuatlut.github.io/TMCStepper/class_t_m_c2209_stepper.html) | ✅      | 4.75…29V     | 2.0A          | UART      | ✅          | ✅ v4        | ✅ v2 |
-| [TMC2224](//teemuatlut.github.io/TMCStepper/class_t_m_c2224_stepper.html) | ✅      | 4.75…36V     | 1.4A          | UART      | ❌          | ❌           | ✅ v2 |
-| TMC2240 | ✅      | 4.75…36V     | 1.4A          | SPI       | ✅          | ✅           | ✅ v2 |
-| [TMC2660](//teemuatlut.github.io/TMCStepper/class_t_m_c2660_stepper.html) | ✅      | 9…30V        | 2.8A          | SPI       | ✅          | ✅ v2        | ❌    |
-| [TMC5130](//teemuatlut.github.io/TMCStepper/class_t_m_c5130_stepper.html) | ✅      | 4.75…46V     | 1.4A          | SPI only  | ✅          | ✅ v2        | ✅ v1 |
-| [TMC5160](//teemuatlut.github.io/TMCStepper/class_t_m_c5160_stepper.html) | ✅      | 8…60V        | ext. MOSFETs  | SPI only  | ✅          | ✅ v2        | ✅ v2 |
-| [TMC5161](//teemuatlut.github.io/TMCStepper/class_t_m_c5161_stepper.html) | ✅      | 8…40V        | 3.5A          | SPI only  | ✅          | ✅ v2        | ✅ v2 |
+| [TMC2130](//marlinfirmware.github.io/TMCStepper/class_t_m_c2130_stepper.html) | ✅      | 5…46V        | 1.4A          | SPI       | ✅          | ✅ v2        | ✅ v1 |
+| [TMC2160](//marlinfirmware.github.io/TMCStepper/class_t_m_c2160_stepper.html) | ✅      | 8…60V        | ext. MOSFETs  | SPI       | ✅          | ✅ v2        | ✅ v2 |
+| [TMC2208](//marlinfirmware.github.io/TMCStepper/class_t_m_c2208_stepper.html) | ✅      | 4.75…36V     | 1.4A          | UART      | ❌          | ❌           | ✅ v2 |
+| [TMC2209](//marlinfirmware.github.io/TMCStepper/class_t_m_c2209_stepper.html) | ✅      | 4.75…29V     | 2.0A          | UART      | ✅          | ✅ v4        | ✅ v2 |
+| [TMC2224](//marlinfirmware.github.io/TMCStepper/class_t_m_c2224_stepper.html) | ✅      | 4.75…36V     | 1.4A          | UART      | ❌          | ❌           | ✅ v2 |
+| [TMC2240](//marlinfirmware.github.io/TMCStepper/class_t_m_c2240_stepper.html) | ✅      | 4.5…36V      | 2.1A          | SPI       | ✅          | ✅ v2, v4    | ✅ v2 |
+| [TMC2660](//marlinfirmware.github.io/TMCStepper/class_t_m_c2660_stepper.html) | ✅      | 9…30V        | 2.8A          | SPI       | ✅          | ✅ v2        | ❌    |
+| [TMC5130](//marlinfirmware.github.io/TMCStepper/class_t_m_c5130_stepper.html) | ✅      | 4.75…46V     | 1.4A          | SPI only  | ✅          | ✅ v2        | ✅ v1 |
+| [TMC5160](//marlinfirmware.github.io/TMCStepper/class_t_m_c5160_stepper.html) | ✅      | 8…60V        | ext. MOSFETs  | SPI only  | ✅          | ✅ v2        | ✅ v2 |
+| [TMC5161](//marlinfirmware.github.io/TMCStepper/class_t_m_c5161_stepper.html) | ✅      | 8…40V        | 3.5A          | SPI only  | ✅          | ✅ v2        | ✅ v2 |
 
-- [New Doxygen documentation](//teemuatlut.github.io/TMCStepper/index.html)
+- [New Doxygen documentation](//marlinfirmware.github.io/TMCStepper/index.html)
 
 ---
 

@@ -8,6 +8,31 @@
 
 #define INIT2240_REGISTER(REG) TMC2240_n::REG##_t REG##_register{}
 
+/**
+ * @brief TMC2240 36V 2.1A RMS stepper driver with integrated current sensing (SPI)
+ *
+ * The TMC2240 chip has SPI and single-wire UART interfaces, selected by its UART_EN pin.
+ * This class implements SPI only (40-bit datagrams, SPI mode 3), with optional daisy-chaining.
+ * UART is not implemented yet because no UART hardware has been available for testing.
+ * examples/TMC2240_UART shows the intended usage and is untested.
+ * Driver modules ship configured for SPI, for example:
+ *  - BIGTREETECH TMC2240 V1.0 (SPI)
+ *  - Mellow FLY TMC2240 (SPI by default, UART by jumper; RREF = 12.3kΩ)
+ *  - FYSETC S2240 (SPI by default, UART by moving resistors)
+ *  - Analog Devices TMC2240-BOB evaluation board (Step/Dir and SPI)
+ *
+ * There are no sense resistors. The full-scale current is set by the resistor on the
+ * IREF pin (Rref, 12k-60kΩ) and DRV_CONF.current_range: I_FS(peak) = K_IFS / Rref,
+ * where K_IFS = 11.75, 24, 36, 36 A·kΩ for current_range 0-3 (1A, 2A, 3A, 3A at 12kΩ).
+ *
+ * Motion comes from the STEP/DIR inputs. There is no internal ramp generator or VACTUAL.
+ *
+ * StallGuard4 (SG4_THRS, SG4_RESULT) works with StealthChop2.
+ * StallGuard2 (COOLCONF.sgt, SG_RESULT) works with SpreadCycle.
+ * DRV_STATUS.stallguard reports a stall from either one.
+ *
+ * Reference: Analog Devices TMC2240 datasheet, Rev 2 (11/23)
+ */
 class TMC2240Stepper {
 	public:
 		TMC2240Stepper(uint16_t pinCS, int8_t link_index = -1);
@@ -271,17 +296,40 @@ class TMC2240Stepper {
 		// R: TSTEP
 		uint32_t TSTEP();
 
-		// RW: SG4_THRS
+		/**
+		 * RW: SG4_THRS (0x74) StallGuard4 configuration
+		 *
+		 * StallGuard4 works with StealthChop2 (en_pwm_mode = 1).
+		 * The stall output (DIAG, DRV_STATUS.stallguard) is active when TCOOLTHRS >= TSTEP.
+		 */
 		uint32_t SG4_THRS();
 		void SG4_THRS(uint32_t input);
+		/**
+		 * SG4_THRS[7:0] StallGuard4 threshold (0-255).
+		 * A stall is signaled when SG4_RESULT falls below this value,
+		 * so a higher value is more sensitive.
+		 */
 		uint8_t sg4_thrs();
 		void sg4_thrs(uint8_t B);
+		/**
+		 * SG4_THRS[8] sg4_filt_en
+		 * 0: SG4_RESULT updates with each fullstep.
+		 * 1: SG4_RESULT is the average of the last four SG4_IND_x measurements.
+		 */
 		bool sg4_filt_en();
 		void sg4_filt_en(bool B);
+		/**
+		 * SG4_THRS[9] sg_angle_offset
+		 * 1: Use SG4_RESULT to compensate for the phase jump when switching
+		 *    between StealthChop2 and SpreadCycle.
+		 */
 		uint8_t sg4_angle_offset();
 		void sg4_angle_offset(uint8_t B);
 
-		// R: SG4_RESULT
+		/**
+		 * R: SG4_RESULT (0x75) StallGuard4 load measurement
+		 * sg4_result() returns 0-510. A lower value means a higher load.
+		 */
 		uint32_t SG4_RESULT();
 		uint16_t sg4_result();
 
